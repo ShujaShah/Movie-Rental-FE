@@ -1,7 +1,7 @@
 import { ToastContainer } from 'react-toastify';
 import Login from '../components/Login';
 
-function Home() {
+function LoginPage() {
   return (
     <>
       <Login />
@@ -10,4 +10,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default LoginPage;
