@@ -1,11 +1,15 @@
 import './App.css';
-import Home from './pages/Home';
+import Home from './pages/LoginPage';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const defaultTheme = createTheme();
 function App() {
   return (
-    <>
-      <Home />
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <>
+        <Home />
+      </>
+    </ThemeProvider>
   );
 }
 
