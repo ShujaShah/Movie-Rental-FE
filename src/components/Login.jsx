@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+import apiClient from '../services/api-client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -29,14 +30,8 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const res = axios({
-      method: 'post',
-      url: 'http://localhost:4000/api/auth',
-      data: {
-        email,
-        password,
-      },
-    })
+    const res = apiClient
+      .post('/api/auth', { email, password })
       .then((res) => {
         console.log('Response is : ', res.data);
         toast('Success');

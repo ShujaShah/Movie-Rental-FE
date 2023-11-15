@@ -1,4 +1,5 @@
 import './App.css';
+import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -7,7 +8,8 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <>
-        <LoginPage />
+        <HomePage />
+        {/* <LoginPage /> */}
       </>
     </ThemeProvider>
   );
