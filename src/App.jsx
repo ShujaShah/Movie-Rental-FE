@@ -1,8 +1,7 @@
 import { Button, ButtonGroup, Grid, GridItem, Show } from '@chakra-ui/react';
 import './App.css';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
 import NavBar from './components/NavBar';
+import MovieGrid from './components/MovieGrid';
 
 function App() {
   return (
@@ -17,16 +16,12 @@ function App() {
           <NavBar />
         </GridItem>
         <Show above="lg">
-          <GridItem area="aside" bg="green">
-            Sidebar
-          </GridItem>
+          <GridItem area="aside">Sidebar</GridItem>
         </Show>
-        <GridItem area="main" bg="blue">
-          Main area
+        <GridItem area="main">
+          <MovieGrid />
         </GridItem>
       </Grid>
-      {/* <HomePage /> */}
-      {/* <LoginPage /> */}
     </>
   );
 }
