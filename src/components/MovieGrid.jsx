@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import apiClient from '../services/api-client';
+import React from 'react';
+
+import useMovies from '../hooks/useMovies';
+import { Text } from '@chakra-ui/react';
 
 const MovieGrid = () => {
-  const [movies, setMovies] = useState([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    apiClient
-      .get('/movies')
-      .then((res) => {
-        console.log(res);
-        setMovies(res.data);
-      })
-      .catch((error) => {
-        setError(error.response.data);
-      });
-  }, []);
-
+  const { movies, error } = useMovies();
   return (
     <>
+      {error && <Text>{error}</Text>}
       <ul>
         {movies.map((movie) => (
           <li key={movie.id}>{movie.title}</li>

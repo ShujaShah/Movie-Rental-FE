@@ -1,22 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import apiClient from '../services/api-client';
+import React from 'react';
 import { Text } from '@chakra-ui/react';
+import useGenres from '../hooks/useGenres';
 
 const Genres = () => {
-  const [genres, setGenres] = useState([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    apiClient
-      .get('/genres')
-      .then((res) => setGenres(res.data))
-      .catch((error) => {
-        if (error.response) {
-          setError(error.response.data.message || 'An error occurred'); // request other than 200
-        }
-      });
-  }, []);
-
+  const { genres, error } = useGenres();
   return (
     <>
       {error && <Text>Error: {error}</Text>}
