@@ -2,6 +2,7 @@ import { Button, ButtonGroup, Grid, GridItem, Show } from '@chakra-ui/react';
 import './App.css';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
           lg: `"nav nav" "aside main"`, // greater than 1024
         }}
       >
-        <GridItem area="nav" bg="coral">
-          Navbar
+        <GridItem area="nav">
+          <NavBar />
         </GridItem>
         <Show above="lg">
           <GridItem area="aside" bg="green">
