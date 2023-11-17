@@ -5,24 +5,24 @@ import { Spinner } from '@chakra-ui/react';
 const useGenres = () => {
   const [genres, setGenres] = useState([]);
   const [error, setError] = useState('');
-  const [spinner, setSpinner] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setSpinner(true);
+    setLoading(true);
     apiClient
       .get('/genres')
       .then((res) => {
         setGenres(res.data);
-        setSpinner(false);
+        setLoading(false);
       })
       .catch((error) => {
         if (error.response) {
           setError(error.response.data.message || 'An error occurred'); // response other than 200
-          setSpinner(false);
+          setLoading(false);
         }
       });
   }, []);
-  return { genres, error, spinner };
+  return { genres, error, loading };
 };
 
 export default useGenres;
