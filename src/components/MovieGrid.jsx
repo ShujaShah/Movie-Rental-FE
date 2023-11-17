@@ -1,18 +1,19 @@
 import React from 'react';
 
 import useMovies from '../hooks/useMovies';
-import { Text } from '@chakra-ui/react';
+import { SimpleGrid, Text } from '@chakra-ui/react';
+import MovieCard from './MovieCard';
 
 const MovieGrid = () => {
-  const { movies, error } = useMovies();
+  const { movies, error } = useMovies(); //calling the custom hook for fetching the data
   return (
     <>
       {error && <Text>{error}</Text>}
-      <ul>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 5 }} spacing={10}>
         {movies.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
+          <MovieCard key={movie.id} movie={movie} />
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };
