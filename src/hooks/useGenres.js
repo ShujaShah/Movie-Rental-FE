@@ -11,7 +11,7 @@ const useGenres = () => {
     apiClient
       .get('/genres')
       .then((res) => {
-        setGenres(res.data);
+        setGenres(res.data.genres);
         setLoading(false);
       })
       .catch((error) => {
