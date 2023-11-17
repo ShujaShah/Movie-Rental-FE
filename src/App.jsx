@@ -3,6 +3,7 @@ import './App.css';
 import NavBar from './components/NavBar';
 import MovieGrid from './components/MovieGrid';
 import Genres from './components/Genres';
+import MovieCardSkeleton from './components/MovieCardSkeleton';
 
 function App() {
   return (
