@@ -11,7 +11,7 @@ const useMovies = () => {
     apiClient
       .get('/movies')
       .then((res) => {
-        setMovies(res.data);
+        setMovies(res.data.movies);
         setIsLoading(false);
       })
       .catch((error) => {

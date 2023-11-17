@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spinner, Text } from '@chakra-ui/react';
+import { List, ListItem, Spinner, Text, Button } from '@chakra-ui/react';
 import useGenres from '../hooks/useGenres';
 
 const Genres = () => {
@@ -8,11 +8,15 @@ const Genres = () => {
     <>
       {error && <Text>Error: {error}</Text>}
       {loading && <Spinner />}
-      <ul>
+      <List>
         {genres.map((genre) => (
-          <li key={genre.id}>{genre.name}</li>
+          <ListItem key={genre.id} paddingY="5px">
+            <Button onClick={() => console.log(genre)} variant="link">
+              {genre.name}
+            </Button>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 };
