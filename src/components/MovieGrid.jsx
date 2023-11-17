@@ -11,7 +11,7 @@ const MovieGrid = () => {
       {error && <Text>{error}</Text>}
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 5 }} spacing={10}>
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie.id} props={movie} />
         ))}
       </SimpleGrid>
     </>

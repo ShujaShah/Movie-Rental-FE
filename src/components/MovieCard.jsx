@@ -2,7 +2,7 @@ import { Card, Heading, Image } from '@chakra-ui/react';
 import React from 'react';
 
 //passing movie as props to the component
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ props: movie }) => {
   return (
     <>
       <Card borderRadius={10} overflow="hidden">
