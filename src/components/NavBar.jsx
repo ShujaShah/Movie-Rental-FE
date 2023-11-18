@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { HStack, Image, Text } from '@chakra-ui/react';
 import logo from '../assets/movie.png';
 import ColorModeSwitch from './ColorModeSwitch';
 import SearchInput from './SearchInput';
+
 const NavBar = ({ onSearch }) => {
   return (
     <>

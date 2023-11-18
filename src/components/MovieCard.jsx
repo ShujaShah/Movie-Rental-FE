@@ -7,7 +7,9 @@ const MovieCard = ({ props: movie }) => {
     <>
       <Card borderRadius={10} overflow="hidden">
         <Image src={movie.movieBanner} />
-        <Heading as="h6">{movie.title}</Heading>
+        <Heading as="h6" fontSize="30px" padding="0.5rem">
+          {movie.title}
+        </Heading>
       </Card>
     </>
   );

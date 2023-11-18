@@ -12,13 +12,16 @@ const Genres = ({ onSelectGenre, selectedGenre }) => {
         {genres.map((genre) => (
           <ListItem key={genre._id} paddingY="5px">
             <Button
+              whiteSpace="normal"
+              textAlign="left"
+              fontSize="20px"
               fontWeight={genre._id === selectedGenre?._id ? 'bold' : 'normal'}
               onClick={() => {
                 onSelectGenre(genre);
               }}
               variant="link"
             >
-              {genre.name}
+              {genre.name.charAt(0).toUpperCase() + genre.name.slice(1)}
             </Button>
           </ListItem>
         ))}
