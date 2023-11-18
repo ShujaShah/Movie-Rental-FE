@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import apiClient from '../services/api-client';
 
-const useMovies = (selectedGenre) => {
+const useMovies = (selectedGenre, searchTerm) => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -9,7 +9,11 @@ const useMovies = (selectedGenre) => {
   useEffect(() => {
     setIsLoading(true);
     // console.log('i am here :', selectedGenre?._id);
-    const queryParams = selectedGenre?._id ? { genre: selectedGenre._id } : {};
+    const queryParams = {
+      ...(selectedGenre?._id ? { genre: selectedGenre._id } : {}),
+      ...(searchTerm ? { search: searchTerm } : {}),
+    };
+    console.log('Query Params:', queryParams);
     apiClient
       .get('/movies', { params: queryParams })
       .then((res) => {
@@ -22,7 +26,7 @@ const useMovies = (selectedGenre) => {
           setIsLoading(false);
         }
       });
-  }, [selectedGenre]);
+  }, [selectedGenre, searchTerm]);
   return { movies, error, isLoading };
 };
 

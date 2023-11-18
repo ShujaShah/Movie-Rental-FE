@@ -7,6 +7,7 @@ import Genres from './components/Genres';
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <>
@@ -17,7 +18,7 @@ function App() {
         }}
       >
         <GridItem area="nav">
-          <NavBar />
+          <NavBar onSearch={(search) => setSearchTerm(search)} />
         </GridItem>
         <Show above="lg">
           <GridItem area="aside">
@@ -28,7 +29,7 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area="main">
-          <MovieGrid selectedGenre={selectedGenre} />
+          <MovieGrid selectedGenre={selectedGenre} setSearchTerm={searchTerm} />
         </GridItem>
       </Grid>
     </>
