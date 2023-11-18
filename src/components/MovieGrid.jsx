@@ -23,3 +23,9 @@ const MovieGrid = ({ selectedGenre }) => {
 };
 
 export default MovieGrid;
+
+//Steps
+//In this Component we are rendering the movie grid.
+//      We are using the Custom hook useMovies to call the api /movies
+//      Returned data is then mapped to the movie card(component), to render the movie cards.
+//      we are receiving the props selectedGenre here, to render the movies that belong to particular genre only.

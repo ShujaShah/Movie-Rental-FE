@@ -25,3 +25,8 @@ const useGenres = () => {
 };
 
 export default useGenres;
+
+//Steps for this custom hook
+// We created genres to save the states.
+//      We hit the api /genres and got the response and saved the state in setGenres function.
+//      As this is the custom hook we return the saved state in genres
