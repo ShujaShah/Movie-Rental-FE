@@ -10,7 +10,7 @@ const Genres = ({ onSelectGenre }) => {
       {loading && <Spinner />}
       <List>
         {genres.map((genre) => (
-          <ListItem key={genre.id} paddingY="5px">
+          <ListItem key={genre._id} paddingY="5px">
             <Button onClick={() => onSelectGenre(genre)} variant="link">
               {genre.name}
             </Button>

@@ -8,7 +8,7 @@ const useMovies = (selectedGenre) => {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log('i am here :', selectedGenre?._id);
+    // console.log('i am here :', selectedGenre?._id);
     const queryParams = selectedGenre?._id ? { genre: selectedGenre._id } : {};
     apiClient
       .get('/movies', { params: queryParams })
