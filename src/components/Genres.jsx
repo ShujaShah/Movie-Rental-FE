@@ -2,7 +2,7 @@ import React from 'react';
 import { List, ListItem, Spinner, Text, Button } from '@chakra-ui/react';
 import useGenres from '../hooks/useGenres';
 
-const Genres = () => {
+const Genres = ({ onSelectGenre }) => {
   const { genres, error, loading } = useGenres();
   return (
     <>
@@ -11,7 +11,7 @@ const Genres = () => {
       <List>
         {genres.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
-            <Button onClick={() => console.log(genre)} variant="link">
+            <Button onClick={() => onSelectGenre(genre)} variant="link">
               {genre.name}
             </Button>
           </ListItem>

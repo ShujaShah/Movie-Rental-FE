@@ -5,8 +5,8 @@ import { SimpleGrid, Text } from '@chakra-ui/react';
 import MovieCard from './MovieCard';
 import MovieCardSkeleton from './MovieCardSkeleton';
 
-const MovieGrid = () => {
-  const { movies, error, isLoading } = useMovies(); //calling the custom hook for fetching the data
+const MovieGrid = ({ selectedGenre }) => {
+  const { movies, error, isLoading } = useMovies(selectedGenre); //calling the custom hook for fetching the data
   const skeletons = [1, 2, 3, 4, 5, 6];
   return (
     <>
