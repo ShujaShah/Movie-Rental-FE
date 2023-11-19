@@ -7,10 +7,8 @@ const useMovie = (_id) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('in the hook');
     apiClient(`/movies/${_id}`)
       .then((res) => {
-        console.log('here is the id', _id);
         setMovie(res.data);
         setLoading(false);
         console.log('Calling from the useMovie HOOK', res.data);
@@ -22,8 +20,7 @@ const useMovie = (_id) => {
         }
       });
   }, [_id]);
-  console.log('useMovie hook', { movie, error });
-  return { movie };
+  return { movie, loading, error };
 };
 
 export default useMovie;
