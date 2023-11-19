@@ -1,14 +1,22 @@
-import { Card, Heading, Image } from '@chakra-ui/react';
+import { Card, Heading, Image, transform } from '@chakra-ui/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 //passing movie as props to the component
 const MovieCard = ({ props: movie }) => {
   return (
     <>
-      <Card borderRadius={10} overflow="hidden">
+      <Card
+        _hover={{
+          transform: 'scale(1.03)',
+          transition: 'transform .15s ease-in',
+        }}
+        borderRadius={10}
+        overflow="hidden"
+      >
         <Image src={movie.movieBanner} />
         <Heading as="h6" fontSize="30px" padding="0.5rem">
-          {movie.title}
+          <Link to={'/movies/' + movie._id}>{movie.title}</Link>
         </Heading>
       </Card>
     </>
