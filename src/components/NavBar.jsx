@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HStack, Image, Text } from '@chakra-ui/react';
+import { HStack, Image, Button } from '@chakra-ui/react';
 import logo from '../assets/movie.png';
 import ColorModeSwitch from './ColorModeSwitch';
 import SearchInput from './SearchInput';
@@ -14,7 +14,11 @@ const NavBar = ({ onSearch }) => {
         </Link>
         <SearchInput onSearch={onSearch} />
         <ColorModeSwitch />
-        <Link to="/login">Login</Link>
+        <Link to="/login">
+          <Button background="#8d2dab" size="md">
+            Login
+          </Button>
+        </Link>
       </HStack>
     </>
   );
