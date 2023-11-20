@@ -5,6 +5,7 @@ import { Box, Button, HStack, Heading, Spinner, Text } from '@chakra-ui/react';
 import { FormControl, FormLabel, Input, Image } from '@chakra-ui/react';
 import movieBg from '../assets/movie-background.png';
 import logo from '../assets/movie.png';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = React.useState('');
@@ -35,7 +36,9 @@ export default function Login() {
           backgroundSize="cover"
         ></Box>
         <Box width={300} ml={5}>
-          <Image src={logo} mb={5} width={100} />
+          <Link to="/">
+            <Image src={logo} mb={5} width={100} />
+          </Link>
           <Heading as="h1" fontSize="25px">
             {' '}
             Log in to your account

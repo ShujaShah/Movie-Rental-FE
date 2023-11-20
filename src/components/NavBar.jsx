@@ -14,6 +14,7 @@ const NavBar = ({ onSearch }) => {
         </Link>
         <SearchInput onSearch={onSearch} />
         <ColorModeSwitch />
+        <Link to="/login">Login</Link>
       </HStack>
     </>
   );
