@@ -6,12 +6,14 @@ import { FormControl, FormLabel, Input, Image } from '@chakra-ui/react';
 import movieBg from '../assets/movie-background.png';
 import logo from '../assets/movie.png';
 import { Link } from 'react-router-dom';
+import useSignup from '../hooks/useSignup';
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [name, setName] = React.useState('');
 
-  const { handleSubmit, isLoading } = useLogin();
+  const { handleSubmit, isLoading } = useSignup();
 
   function handleEmail(e) {
     setEmail(e.target.value);
@@ -21,9 +23,13 @@ export default function Login() {
     setPassword(e.target.value);
   }
 
+  function handleName(e) {
+    setName(e.target.value);
+  }
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(email, password);
+    handleSubmit(email, name, password);
   };
 
   return (
@@ -41,7 +47,7 @@ export default function Login() {
           </Link>
           <Heading as="h1" fontSize="25px">
             {' '}
-            Log in to your account
+            Create your account
           </Heading>
           <form onSubmit={handleFormSubmit}>
             <FormControl mt={4}>
@@ -51,6 +57,15 @@ export default function Login() {
                 name="email"
                 value={email}
                 onChange={handleEmail}
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Name</FormLabel>
+              <Input
+                type="text"
+                name="name"
+                value={name}
+                onChange={handleName}
               />
             </FormControl>
             <FormControl mt={4} mb={4}>
@@ -68,7 +83,7 @@ export default function Login() {
                 border="1px solid #8d2dab"
                 type="submit"
               >
-                {isLoading ? <Spinner /> : 'Login'}
+                {isLoading ? <Spinner /> : 'Signup'}
               </Button>
             </FormControl>
           </form>
