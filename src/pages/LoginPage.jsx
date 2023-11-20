@@ -1,11 +1,11 @@
-import { ToastContainer } from 'react-toastify';
+//import { ToastContainer } from 'react-toastify';
 import Login from '../components/Login';
 
 function LoginPage() {
   return (
     <>
       <Login />
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 }

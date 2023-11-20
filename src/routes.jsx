@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import MovieDetailPage from './pages/MovieDetailPage';
 import LayoutPage from './pages/LayoutPage';
 import ErrorPage from './pages/ErrorPage';
+import LoginPage from './pages/LoginPage';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'movies/:_id', element: <MovieDetailPage /> },
     ],
+  },
+  {
+    path: 'login',
+    element: <LoginPage />,
   },
 ]);
 
