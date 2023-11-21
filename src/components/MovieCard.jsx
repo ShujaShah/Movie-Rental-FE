@@ -16,7 +16,7 @@ const MovieCard = ({ props: movie }) => {
         mt={5}
       >
         <Link to={'/movies/' + movie._id}>
-          <Image src={movie.movieBanner} height={400} />
+          <Image src={movie.movieBanner} height={400} width="100%" />
         </Link>
 
         <Heading as="h6" fontSize="24px" padding="0.5rem">
