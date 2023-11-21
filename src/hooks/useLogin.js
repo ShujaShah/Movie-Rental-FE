@@ -2,7 +2,6 @@ import { useState } from 'react';
 import apiClient from '../services/api-client';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
