@@ -12,8 +12,6 @@ function HomePage() {
 
   const { user, HandleLogout } = useUser();
 
-  //const [logout, SetLogout] = useState(false)
-
   return (
     <>
       <Grid

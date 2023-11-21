@@ -7,10 +7,13 @@ const useUser = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
 
   const token = localStorage.getItem('x-auth-token');
+
   const HandleLogout = () => {
     localStorage.removeItem('x-auth-token');
+    setIsLoggedOut(true);
     toast({
       title: 'Logging Out...',
       description: 'Success',
@@ -18,8 +21,9 @@ const useUser = () => {
       duration: 3000,
       isClosable: true,
     });
-    navigate('/');
+    navigate('/login');
   };
+
   useEffect(() => {
     const config = {
       headers: {

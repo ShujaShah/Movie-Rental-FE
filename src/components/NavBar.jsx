@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useEffect } from 'react';
 
 const NavBar = ({ onSearch, user, HandleLogout }) => {
   const isLoggedIn = !!user;
