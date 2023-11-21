@@ -8,7 +8,6 @@ import MovieGrid from '../components/MovieGrid';
 import Genres from '../components/Genres';
 import useLogin from '../hooks/useLogin';
 import apiClient from '../services/api-client';
-import axios from 'axios';
 
 function HomePage() {
   const [selectedGenre, setSelectedGenre] = useState(null);

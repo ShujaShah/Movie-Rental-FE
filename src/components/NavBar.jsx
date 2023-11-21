@@ -7,6 +7,11 @@ import { Link } from 'react-router-dom';
 
 const NavBar = ({ onSearch, user }) => {
   const isLoggedIn = !!user;
+
+  const HandleLogout = () => {
+    localStorage.removeItem('x-auth-token');
+  };
+
   return (
     <>
       <HStack padding="10px">
@@ -16,7 +21,10 @@ const NavBar = ({ onSearch, user }) => {
         <SearchInput onSearch={onSearch} />
         <ColorModeSwitch />
         {isLoggedIn ? (
-          <Text fontWeight="700">{user.name}</Text>
+          <>
+            <Text fontWeight="700">{user.name}</Text>
+            <Button onClick={HandleLogout}>Logout</Button>
+          </>
         ) : (
           <Link to="/login">
             <Button background="#8d2dab" size="md">
