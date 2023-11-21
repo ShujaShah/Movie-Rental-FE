@@ -30,7 +30,7 @@ function HomePage() {
     const res = apiClient
       .get('/users/me', config)
       .then((res) => {
-        //setUser(res.data);
+        setUser(res.data);
         console.log(res.data);
       })
       .then((error) => console.error('Error:', error.response.data));
@@ -45,7 +45,7 @@ function HomePage() {
         }}
       >
         <GridItem area="nav">
-          <NavBar onSearch={(search) => setSearchTerm(search)} />
+          <NavBar onSearch={(search) => setSearchTerm(search)} user={user} />
         </GridItem>
         <Show above="lg">
           <GridItem

@@ -5,8 +5,8 @@ import ColorModeSwitch from './ColorModeSwitch';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
 
-const NavBar = ({ onSearch }) => {
-  // const isLoggedIn = !!user;
+const NavBar = ({ onSearch, user }) => {
+  const isLoggedIn = !!user;
   return (
     <>
       <HStack padding="10px">
@@ -15,7 +15,7 @@ const NavBar = ({ onSearch }) => {
         </Link>
         <SearchInput onSearch={onSearch} />
         <ColorModeSwitch />
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <Text>{user.name}</Text>
         ) : (
           <Link to="/login">
@@ -23,7 +23,7 @@ const NavBar = ({ onSearch }) => {
               Login
             </Button>
           </Link>
-        )} */}
+        )}
 
         <Button>
           <Link to="/login">Login</Link>
