@@ -13,6 +13,7 @@ const MovieCard = ({ props: movie }) => {
         }}
         borderRadius={10}
         overflow="hidden"
+        mt={5}
       >
         <Link to={'/movies/' + movie._id}>
           <Image src={movie.movieBanner} height={400} />
