@@ -1,3 +1,7 @@
+body {
+  padding: 20px;
+}
+
 .search-form {
   width: 100%;
 }

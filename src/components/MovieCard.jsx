@@ -14,8 +14,11 @@ const MovieCard = ({ props: movie }) => {
         borderRadius={10}
         overflow="hidden"
       >
-        <Image src={movie.movieBanner} />
-        <Heading as="h6" fontSize="30px" padding="0.5rem">
+        <Link to={'/movies/' + movie._id}>
+          <Image src={movie.movieBanner} height={400} />
+        </Link>
+
+        <Heading as="h6" fontSize="24px" padding="0.5rem">
           <Link to={'/movies/' + movie._id}>{movie.title}</Link>
         </Heading>
       </Card>
