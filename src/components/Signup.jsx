@@ -83,10 +83,19 @@ export default function Signup() {
                 border="1px solid #8d2dab"
                 type="submit"
               >
-                {isLoading ? <Spinner /> : 'Signup'}
+                {isLoading ? <Spinner /> : 'Register'}
               </Button>
             </FormControl>
           </form>
+          <Heading as="h2" fontSize="20px" mt={5} mb={3}>
+            Already have an account?
+          </Heading>
+          <Heading as="h5" size="md">
+            <Link to="/login" style={{ color: '#8d2dab' }} fontSize="20px">
+              Login{' '}
+            </Link>{' '}
+            Instead
+          </Heading>
         </Box>
       </HStack>
     </>

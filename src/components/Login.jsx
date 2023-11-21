@@ -72,6 +72,15 @@ export default function Login() {
               </Button>
             </FormControl>
           </form>
+          <Heading as="h2" fontSize="20px" mt={5} mb={3}>
+            Don't have an account?
+          </Heading>
+          <Heading as="h5" size="md">
+            <Link to="/register" style={{ color: '#8d2dab' }} fontSize="20px">
+              Register{' '}
+            </Link>{' '}
+            Instead
+          </Heading>
         </Box>
       </HStack>
     </>

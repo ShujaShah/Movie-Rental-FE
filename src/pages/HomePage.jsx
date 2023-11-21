@@ -1,15 +1,40 @@
 import { ToastContainer } from 'react-toastify';
 import Login from '../components/Login';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 import '../App.css';
 import NavBar from '../components/NavBar';
 import MovieGrid from '../components/MovieGrid';
 import Genres from '../components/Genres';
+import useLogin from '../hooks/useLogin';
+import apiClient from '../services/api-client';
+import axios from 'axios';
 
 function HomePage() {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+
+  const [user, setUser] = useState(null);
+
+  const { result } = useLogin();
+  console.log('here is the result', result);
+
+  const token = localStorage.getItem('x-auth-token');
+  useEffect(() => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': token,
+      },
+    };
+    const res = apiClient
+      .get('/users/me', config)
+      .then((res) => {
+        //setUser(res.data);
+        console.log(res.data);
+      })
+      .then((error) => console.error('Error:', error.response.data));
+  }, [token]);
 
   return (
     <>

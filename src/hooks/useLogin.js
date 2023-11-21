@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import apiClient from '../services/api-client';
 import { useToast } from '@chakra-ui/react';
-import { useNavigate, useNavigation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [user, setUser] = useState('');
+  const [token, setToken] = useState(null);
 
   const toast = useToast();
   const handleSubmit = (email, password) => {
@@ -14,6 +17,12 @@ const useLogin = () => {
       .post('/auth', { email, password })
       .then((res) => {
         console.log('Response is : ', res.data);
+        localStorage.setItem('x-auth-token', res.data.token);
+        // axios.defaults.headers.common[
+        //   'Authorization'
+        // ] = `Bearer ${res['token']}`;
+        setToken(res.data.token);
+        setUser(res.data.user);
         setIsLoading(false);
         toast({
           title: 'Success',
@@ -36,7 +45,9 @@ const useLogin = () => {
         });
       });
   };
-  return { handleSubmit, isLoading };
+  console.log(user);
+
+  return { handleSubmit, isLoading, user, token };
 };
 
 export default useLogin;
