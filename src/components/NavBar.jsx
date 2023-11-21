@@ -11,11 +11,7 @@ import logo from '../assets/movie.png';
 import ColorModeSwitch from './ColorModeSwitch';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useToast } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import { useEffect } from 'react';
-
 const NavBar = ({ onSearch, user, HandleLogout }) => {
   const isLoggedIn = !!user;
 
