@@ -16,7 +16,7 @@ const NavBar = ({ onSearch, user }) => {
         <SearchInput onSearch={onSearch} />
         <ColorModeSwitch />
         {isLoggedIn ? (
-          <Text>{user.name}</Text>
+          <Text fontWeight="700">{user.name}</Text>
         ) : (
           <Link to="/login">
             <Button background="#8d2dab" size="md">
@@ -24,10 +24,6 @@ const NavBar = ({ onSearch, user }) => {
             </Button>
           </Link>
         )}
-
-        <Button>
-          <Link to="/login">Login</Link>
-        </Button>
       </HStack>
     </>
   );
