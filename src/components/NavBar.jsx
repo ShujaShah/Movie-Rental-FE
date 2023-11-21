@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
-const NavBar = ({ onSearch, user }) => {
+const NavBar = ({ onSearch, user, logout }) => {
   const toast = useToast();
   const navigate = useNavigate();
   const isLoggedIn = !!user;
@@ -29,7 +29,8 @@ const NavBar = ({ onSearch, user }) => {
       duration: 3000,
       isClosable: true,
     });
-    navigate('/');
+    logout((prev) => !prev);
+    // navigate('/');
   };
 
   return (

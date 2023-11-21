@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
 import apiClient from '../services/api-client';
-import { useNavigate } from 'react-router-dom';
-
-import { useToast } from '@chakra-ui/react';
 
 const useUser = () => {
   const [user, setUser] = useState(null);

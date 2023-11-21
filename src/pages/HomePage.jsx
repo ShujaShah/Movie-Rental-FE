@@ -1,13 +1,9 @@
-import { ToastContainer } from 'react-toastify';
-import Login from '../components/Login';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 import '../App.css';
 import NavBar from '../components/NavBar';
 import MovieGrid from '../components/MovieGrid';
 import Genres from '../components/Genres';
-import useLogin from '../hooks/useLogin';
-import apiClient from '../services/api-client';
 import useUser from '../hooks/useUser';
 
 function HomePage() {
