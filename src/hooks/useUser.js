@@ -1,10 +1,25 @@
 import { useState, useEffect } from 'react';
 import apiClient from '../services/api-client';
+import { useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const useUser = () => {
+  const toast = useToast();
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   const token = localStorage.getItem('x-auth-token');
+  const HandleLogout = () => {
+    localStorage.removeItem('x-auth-token');
+    toast({
+      title: 'Logging Out...',
+      description: 'Success',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
+    navigate('/');
+  };
   useEffect(() => {
     const config = {
       headers: {
@@ -21,7 +36,7 @@ const useUser = () => {
       .then((error) => console.error('Error:', error.response.data));
   }, [token]);
 
-  return { user };
+  return { user, HandleLogout };
 };
 
 export default useUser;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router-dom'; // Assuming you're using react-router
-import useMovie from '../hooks/useMovie'; // Update with the correct path
+import { useParams } from 'react-router-dom';
+import useMovie from '../hooks/useMovie';
 
 import {
   Heading,
@@ -9,16 +9,18 @@ import {
   Grid,
   GridItem,
   Spinner,
-  layout,
 } from '@chakra-ui/react';
+import NavBar from '../components/NavBar';
+import useUser from '../hooks/useUser';
 
 const MovieDetailsPage = () => {
   const { _id } = useParams();
   const { movie, loading, error } = useMovie(_id);
-  console.log('i am here', movie.genre?.name);
 
+  const { onSearch, user, HandleLogout } = useUser();
   return (
     <>
+      <NavBar onSearch={onSearch} user={user} HandleLogout={HandleLogout} />
       {loading && <Spinner />}
       <Grid margin={10} templateColumns="repeat(3, 1fr)" gap={6}>
         <GridItem>

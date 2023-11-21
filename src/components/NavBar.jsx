@@ -15,23 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
-const NavBar = ({ onSearch, user, logout }) => {
-  const toast = useToast();
-  const navigate = useNavigate();
+const NavBar = ({ onSearch, user, HandleLogout }) => {
   const isLoggedIn = !!user;
-
-  const HandleLogout = () => {
-    localStorage.removeItem('x-auth-token');
-    toast({
-      title: 'Logging Out...',
-      description: 'Success',
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
-    logout((prev) => !prev);
-    // navigate('/');
-  };
 
   return (
     <>

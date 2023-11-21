@@ -11,7 +11,6 @@ const useMovie = (_id) => {
       .then((res) => {
         setMovie(res.data);
         setLoading(false);
-        console.log('Calling from the useMovie HOOK', res.data);
       })
       .catch((error) => {
         if (error.response) {

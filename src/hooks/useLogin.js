@@ -7,7 +7,6 @@ const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState('');
-  const [token, setToken] = useState(null);
 
   const toast = useToast();
   const handleSubmit = (email, password) => {
@@ -17,10 +16,6 @@ const useLogin = () => {
       .then((res) => {
         console.log('Response is : ', res.data);
         localStorage.setItem('x-auth-token', res.data.token);
-        // axios.defaults.headers.common[
-        //   'Authorization'
-        // ] = `Bearer ${res['token']}`;
-        setToken(res.data.token);
         setUser(res.data.user);
         setIsLoading(false);
         toast({
@@ -46,7 +41,7 @@ const useLogin = () => {
   };
   console.log(user);
 
-  return { handleSubmit, isLoading, user, token };
+  return { handleSubmit, isLoading, user };
 };
 
 export default useLogin;

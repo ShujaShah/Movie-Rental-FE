@@ -10,7 +10,9 @@ function HomePage() {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { user } = useUser();
+  const { user, HandleLogout } = useUser();
+
+  //const [logout, SetLogout] = useState(false)
 
   return (
     <>
@@ -21,7 +23,11 @@ function HomePage() {
         }}
       >
         <GridItem area="nav">
-          <NavBar onSearch={(search) => setSearchTerm(search)} user={user} />
+          <NavBar
+            onSearch={(search) => setSearchTerm(search)}
+            user={user}
+            HandleLogout={HandleLogout}
+          />
         </GridItem>
         <Show above="lg">
           <GridItem
