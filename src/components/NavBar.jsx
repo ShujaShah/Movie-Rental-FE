@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import {
   HStack,
   Image,
   Button,
-  Text,
   Menu,
   MenuButton,
   MenuList,
@@ -45,8 +43,12 @@ const NavBar = ({ onSearch, user }) => {
         {isLoggedIn ? (
           <>
             <Menu>
-              <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                {user.name}
+              <MenuButton
+                as={Button}
+                display="flex"
+                rightIcon={<ChevronDownIcon />}
+              >
+                {user.name} {''}
               </MenuButton>
               <MenuList>
                 <MenuItem onClick={HandleLogout}>Logout</MenuItem>
