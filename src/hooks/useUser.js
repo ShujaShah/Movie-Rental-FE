@@ -12,7 +12,6 @@ const useUser = () => {
 
   const HandleLogout = () => {
     localStorage.removeItem('x-auth-token');
-    setIsLoggedOut(true);
     toast({
       title: 'Logging Out...',
       description: 'Success',

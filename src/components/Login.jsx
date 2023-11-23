@@ -7,23 +7,32 @@ import movieBg from '../assets/movie-background.png';
 import logo from '../assets/movie.png';
 import { Link } from 'react-router-dom';
 
+import {
+  loginReducer,
+  loginInitialState,
+} from '../state-management/reducers/loginReducer';
+
 export default function Login() {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  // const [email, setEmail] = React.useState('');
+  // const [password, setPassword] = React.useState('');
+
+  const [state, dispatch] = React.useReducer(loginReducer, loginInitialState);
 
   const { handleSubmit, isLoading } = useLogin();
 
   function handleEmail(e) {
-    setEmail(e.target.value);
+    //setEmail(e.target.value);
+    dispatch({ type: 'SET_EMAIL', payload: e.target.value });
   }
 
   function handlePassword(e) {
-    setPassword(e.target.value);
+    // setPassword(e.target.value);
+    dispatch({ type: 'SET_PASSWORD', payload: e.target.value });
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(email, password);
+    handleSubmit(state.email, state.password);
   };
 
   return (
@@ -49,7 +58,7 @@ export default function Login() {
               <Input
                 type="email"
                 name="email"
-                value={email}
+                value={state.email}
                 onChange={handleEmail}
               />
             </FormControl>
@@ -58,7 +67,7 @@ export default function Login() {
               <Input
                 type="password"
                 name="password"
-                value={password}
+                value={state.password}
                 onChange={handlePassword}
               />
             </FormControl>
