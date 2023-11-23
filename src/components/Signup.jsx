@@ -7,29 +7,41 @@ import movieBg from '../assets/movie-background.png';
 import logo from '../assets/movie.png';
 import { Link } from 'react-router-dom';
 import useSignup from '../hooks/useSignup';
+import {
+  SignupReducer,
+  registerInitialState,
+} from '../state-management/reducers/signupReducer';
 
 export default function Signup() {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [name, setName] = React.useState('');
+  // const [email, setEmail] = React.useState('');
+  // const [password, setPassword] = React.useState('');
+  // const [name, setName] = React.useState('');
+
+  const [state, dispatch] = React.useReducer(
+    SignupReducer,
+    registerInitialState
+  );
 
   const { handleSubmit, isLoading } = useSignup();
 
   function handleEmail(e) {
-    setEmail(e.target.value);
+    //setEmail(e.target.value);
+    dispatch({ type: 'SET_EMAIL', payload: e.target.value });
   }
 
   function handlePassword(e) {
-    setPassword(e.target.value);
+    //setPassword(e.target.value)
+    dispatch({ type: 'SET_PASSWORD', payload: e.target.value });
   }
 
   function handleName(e) {
-    setName(e.target.value);
+    //setName(e.target.value)
+    dispatch({ type: 'SET_NAME', payload: e.target.value });
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(email, name, password);
+    handleSubmit(state.email, state.name, state.password);
   };
 
   return (
@@ -55,7 +67,7 @@ export default function Signup() {
               <Input
                 type="email"
                 name="email"
-                value={email}
+                value={state.email}
                 onChange={handleEmail}
               />
             </FormControl>
@@ -64,7 +76,7 @@ export default function Signup() {
               <Input
                 type="text"
                 name="name"
-                value={name}
+                value={state.name}
                 onChange={handleName}
               />
             </FormControl>
@@ -73,7 +85,7 @@ export default function Signup() {
               <Input
                 type="password"
                 name="password"
-                value={password}
+                value={state.password}
                 onChange={handlePassword}
               />
             </FormControl>

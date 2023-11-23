@@ -7,6 +7,8 @@ import movieBg from '../assets/movie-background.png';
 import logo from '../assets/movie.png';
 import { Link } from 'react-router-dom';
 
+//Commented out code is implementation using the state
+
 import {
   loginReducer,
   loginInitialState,
