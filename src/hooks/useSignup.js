@@ -14,6 +14,7 @@ const useSignup = () => {
       .post('/users', { email, name, password })
       .then((res) => {
         console.log('Response is : ', res.data);
+        localStorage.setItem('x-auth-token', res.data.token);
         setIsLoading(false);
         toast({
           title: 'Success',
