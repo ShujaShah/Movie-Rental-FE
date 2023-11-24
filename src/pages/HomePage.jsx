@@ -10,7 +10,7 @@ function HomePage() {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { user, HandleLogout } = useUser();
+  const { user, HandleLogout, HandleProfile } = useUser();
 
   return (
     <>
@@ -25,6 +25,7 @@ function HomePage() {
             onSearch={(search) => setSearchTerm(search)}
             user={user}
             HandleLogout={HandleLogout}
+            HandleProfile={HandleProfile}
           />
         </GridItem>
         <Show above="lg">

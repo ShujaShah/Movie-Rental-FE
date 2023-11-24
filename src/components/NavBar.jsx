@@ -12,7 +12,8 @@ import ColorModeSwitch from './ColorModeSwitch';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-const NavBar = ({ onSearch, user, HandleLogout }) => {
+import Profile from './Profile';
+const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
   const isLoggedIn = !!user;
 
   return (
@@ -34,6 +35,7 @@ const NavBar = ({ onSearch, user, HandleLogout }) => {
                 {user.name} {''}
               </MenuButton>
               <MenuList>
+                <MenuItem onClick={HandleProfile}>Profile</MenuItem>
                 <MenuItem onClick={HandleLogout}>Logout</MenuItem>
               </MenuList>
             </Menu>

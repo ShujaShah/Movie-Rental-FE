@@ -22,6 +22,10 @@ const useUser = () => {
     navigate('/login');
   };
 
+  const HandleProfile = () => {
+    navigate('profile');
+  };
+
   useEffect(() => {
     const config = {
       headers: {
@@ -38,7 +42,7 @@ const useUser = () => {
       .then((error) => console.error('Error:', error.response.data));
   }, [token]);
 
-  return { user, HandleLogout };
+  return { user, HandleLogout, HandleProfile };
 };
 
 export default useUser;
