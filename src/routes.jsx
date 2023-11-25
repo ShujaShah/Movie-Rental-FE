@@ -5,7 +5,7 @@ import LayoutPage from './pages/LayoutPage';
 import ErrorPage from './pages/ErrorPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import ProfilePage from './pages/profilePage';
+import ProfilePage from './pages/ProfilePage';
 
 const router = createBrowserRouter([
   {

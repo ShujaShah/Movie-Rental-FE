@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const useUser = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [isloading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
 
   const token = localStorage.getItem('x-auth-token');
@@ -27,6 +28,7 @@ const useUser = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -37,12 +39,16 @@ const useUser = () => {
       .get('/users/me', config)
       .then((res) => {
         setUser(res.data);
-        console.log(res.data);
+        setIsLoading(false);
+        console.log('current user is :', res.data);
       })
-      .then((error) => console.error('Error:', error.response.data));
+      .then((error) => {
+        setIsLoading(false);
+        console.error('Error:', error.response.data);
+      });
   }, [token]);
 
-  return { user, HandleLogout, HandleProfile };
+  return { user, HandleLogout, isloading, HandleProfile };
 };
 
 export default useUser;
