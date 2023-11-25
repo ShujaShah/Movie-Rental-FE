@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useUser from '../hooks/useUser';
-import { Spinner } from '@chakra-ui/react';
+import { GridItem, Spinner, Grid } from '@chakra-ui/react';
+import { EditIcon } from '@chakra-ui/icons';
 import {
   HStack,
   Box,
@@ -26,6 +27,8 @@ const Profile = () => {
   const [name, setName] = useState(initialName);
   const [phone, setPhone] = useState(initialPhone);
 
+  const [isFormDisabled, setIsFormDisabled] = useState(true);
+
   console.log('update email:', initialUser?.email);
 
   function handleEmail(e) {
@@ -44,6 +47,9 @@ const Profile = () => {
     e.preventDefault();
     handleSubmit(email, name, phone);
   };
+  const handleEditClick = () => {
+    setIsFormDisabled(false);
+  };
 
   if (!user) return <p>Login to view your profile</p>;
 
@@ -51,51 +57,63 @@ const Profile = () => {
     <>
       {isLoading && <Spinner />}
       <HStack>
-        <Box width={300} ml={5}>
-          <Heading as="h1" fontSize="25px">
-            {' '}
-            Account Details
-          </Heading>
-          <form onSubmit={handleFormSubmit}>
-            <FormControl mt={4}>
-              <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                name="email"
-                placeholder={initialEmail}
-                value={email}
-                onChange={handleEmail}
-              />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Name</FormLabel>
-              <Input
-                type="text"
-                name="name"
-                placeholder={initialName}
-                value={name}
-                onChange={handleName}
-              />
-            </FormControl>
-            <FormControl mt={4} mb={4}>
-              <FormLabel>Phone</FormLabel>
-              <Input
-                type="number"
-                placeholder={initialPhone}
-                name="phone"
-                value={phone}
-                onChange={handlePhone}
-              />
-            </FormControl>
-            <FormControl>
-              <Button
-                variant="outline"
-                border="1px solid #8d2dab"
-                type="submit"
-              >
-                {isLoading ? <Spinner /> : 'Update'}
+        <Box width={350} ml={5}>
+          <Grid templateColumns="repeat(2, 1fr)" gap={1}>
+            <GridItem width="100%">
+              {' '}
+              <Heading as="h1" fontSize="25px">
+                Account Details
+              </Heading>
+            </GridItem>
+            <GridItem>
+              {' '}
+              <Button style={{ textAlign: 'right' }} onClick={handleEditClick}>
+                <EditIcon />
               </Button>
-            </FormControl>
+            </GridItem>
+          </Grid>
+          <form onSubmit={handleFormSubmit}>
+            <fieldset disabled={isFormDisabled}>
+              <FormControl mt={4}>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder={initialEmail}
+                  value={email}
+                  onChange={handleEmail}
+                />
+              </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Name</FormLabel>
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder={initialName}
+                  value={name}
+                  onChange={handleName}
+                />
+              </FormControl>
+              <FormControl mt={4} mb={4}>
+                <FormLabel>Phone</FormLabel>
+                <Input
+                  type="number"
+                  placeholder={initialPhone}
+                  name="phone"
+                  value={phone}
+                  onChange={handlePhone}
+                />
+              </FormControl>
+              <FormControl>
+                <Button
+                  variant="outline"
+                  border="1px solid #8d2dab"
+                  type="submit"
+                >
+                  {isLoading ? <Spinner /> : 'Update'}
+                </Button>
+              </FormControl>
+            </fieldset>
           </form>{' '}
         </Box>
       </HStack>
