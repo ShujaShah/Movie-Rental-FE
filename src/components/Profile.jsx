@@ -62,7 +62,7 @@ const Profile = () => {
               <Input
                 type="email"
                 name="email"
-                defaultValue="shuja.shah@iquasar.com"
+                placeholder={initialEmail}
                 value={email}
                 onChange={handleEmail}
               />
@@ -72,7 +72,7 @@ const Profile = () => {
               <Input
                 type="text"
                 name="name"
-                defaultValue={initialName}
+                placeholder={initialName}
                 value={name}
                 onChange={handleName}
               />
@@ -81,7 +81,7 @@ const Profile = () => {
               <FormLabel>Phone</FormLabel>
               <Input
                 type="number"
-                defaultValue={initialPhone}
+                placeholder={initialPhone}
                 name="phone"
                 value={phone}
                 onChange={handlePhone}
