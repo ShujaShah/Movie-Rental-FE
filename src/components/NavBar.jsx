@@ -16,6 +16,8 @@ import Profile from './Profile';
 const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
   const isLoggedIn = !!user;
 
+  console.log('i am here the user', user);
+
   return (
     <>
       <HStack padding="10px">
@@ -35,7 +37,9 @@ const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
                 {user.name} {''}
               </MenuButton>
               <MenuList>
-                <MenuItem onClick={HandleProfile}>Profile</MenuItem>
+                {user.role === 'customer' && (
+                  <MenuItem onClick={HandleProfile}>Profile</MenuItem>
+                )}
                 <MenuItem onClick={HandleLogout}>Logout</MenuItem>
               </MenuList>
             </Menu>
