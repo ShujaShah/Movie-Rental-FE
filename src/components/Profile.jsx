@@ -65,9 +65,9 @@ const Profile = () => {
                 Account Details
               </Heading>
             </GridItem>
-            <GridItem>
+            <GridItem style={{ textAlign: 'right' }}>
               {' '}
-              <Button style={{ textAlign: 'right' }} onClick={handleEditClick}>
+              <Button onClick={handleEditClick}>
                 <EditIcon />
               </Button>
             </GridItem>
