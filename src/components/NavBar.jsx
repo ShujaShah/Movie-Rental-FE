@@ -12,7 +12,6 @@ import ColorModeSwitch from './ColorModeSwitch';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import Profile from './Profile';
 const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
   const isLoggedIn = !!user;
 
@@ -34,7 +33,7 @@ const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
                 display="flex"
                 rightIcon={<ChevronDownIcon />}
               >
-                {user.name} {''}
+                {user.profile.name} {''}
               </MenuButton>
               <MenuList>
                 {user.role === 'customer' && (
