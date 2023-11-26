@@ -24,7 +24,7 @@ const useUser = () => {
   };
 
   const HandleProfile = () => {
-    navigate('profile');
+    navigate('/profile');
   };
 
   useEffect(() => {
@@ -40,7 +40,6 @@ const useUser = () => {
       .then((res) => {
         setUser(res.data);
         setIsLoading(false);
-        console.log('current user is :', res.data);
       })
       .then((error) => {
         setIsLoading(false);

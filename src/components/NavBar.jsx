@@ -15,8 +15,6 @@ import { ChevronDownIcon } from '@chakra-ui/icons';
 const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
   const isLoggedIn = !!user;
 
-  console.log('i am here the user', user);
-
   return (
     <>
       <HStack padding="10px">

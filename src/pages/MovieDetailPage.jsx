@@ -17,10 +17,15 @@ const MovieDetailsPage = () => {
   const { _id } = useParams();
   const { movie, loading, error } = useMovie(_id);
 
-  const { onSearch, user, HandleLogout } = useUser();
+  const { onSearch, user, HandleLogout, HandleProfile } = useUser();
   return (
     <>
-      <NavBar onSearch={onSearch} user={user} HandleLogout={HandleLogout} />
+      <NavBar
+        onSearch={onSearch}
+        user={user}
+        HandleLogout={HandleLogout}
+        HandleProfile={HandleProfile}
+      />
       {loading && <Spinner />}
       <Grid margin={10} templateColumns="repeat(3, 1fr)" gap={6}>
         <GridItem>
