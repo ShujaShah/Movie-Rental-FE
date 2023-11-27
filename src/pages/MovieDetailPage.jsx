@@ -49,7 +49,7 @@ const MovieDetailsPage = () => {
           <Text>Number in Stock: {movie.numberInStock}</Text>
           <Text>Daily Rental Rate: ${movie.dailyRentalRate}.00</Text>
           <Button mt={5} variant="outline" onClick={handleRental}>
-            Rent
+            Rent Now
           </Button>
         </GridItem>
       </Grid>
