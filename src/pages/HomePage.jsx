@@ -12,6 +12,8 @@ function HomePage() {
 
   const { user, HandleLogout, isloading, HandleProfile } = useUser();
 
+  console.log('here is the user....', user);
+
   return (
     <>
       <Grid

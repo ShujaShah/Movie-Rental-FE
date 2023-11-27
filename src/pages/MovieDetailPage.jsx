@@ -9,6 +9,7 @@ import {
   Grid,
   GridItem,
   Spinner,
+  Button,
 } from '@chakra-ui/react';
 import NavBar from '../components/NavBar';
 import useUser from '../hooks/useUser';
@@ -37,6 +38,9 @@ const MovieDetailsPage = () => {
           <Text>Genre: {movie.genre?.name}</Text>
           <Text>Number in Stock: {movie.numberInStock}</Text>
           <Text>Daily Rental Rate: ${movie.dailyRentalRate}.00</Text>
+          <Button mt={5} variant="outline">
+            Rent
+          </Button>
         </GridItem>
       </Grid>
     </>

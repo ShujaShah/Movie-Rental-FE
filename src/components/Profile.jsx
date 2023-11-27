@@ -29,8 +29,6 @@ const Profile = () => {
 
   const [isFormDisabled, setIsFormDisabled] = useState(true);
 
-  console.log('update email:', initialUser?.email);
-
   function handleEmail(e) {
     setEmail(e.target.value);
   }
