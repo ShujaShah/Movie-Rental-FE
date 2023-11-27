@@ -20,7 +20,7 @@ const useUpdateUser = (_id) => {
         console.log('set initial user is : ', res.data);
         setIsLoading(false);
       })
-      .then((error) => {
+      .catch((error) => {
         setIsLoading(false);
         console.error('Error:', error.response.data);
       });
