@@ -28,13 +28,25 @@ const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
         {isLoggedIn ? (
           <>
             <Menu>
-              <MenuButton
-                as={Button}
-                display="flex"
-                rightIcon={<ChevronDownIcon />}
-              >
-                {user.profile.name} {''}
-              </MenuButton>
+              {user.role === 'admin' && (
+                <MenuButton
+                  as={Button}
+                  display="flex"
+                  rightIcon={<ChevronDownIcon />}
+                >
+                  {user.name} {''}
+                </MenuButton>
+              )}
+              {user.role === 'customer' && (
+                <MenuButton
+                  as={Button}
+                  display="flex"
+                  rightIcon={<ChevronDownIcon />}
+                >
+                  {user.profile.name} {''}
+                </MenuButton>
+              )}
+
               <MenuList>
                 {user.role === 'customer' && (
                   <MenuItem onClick={HandleProfile}>Profile</MenuItem>
