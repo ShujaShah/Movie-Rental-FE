@@ -22,6 +22,11 @@ const RentalList = () => {
   const _id = user?.profile._id;
   const { rentals } = useUpdateUser(_id);
   console.log(rentals);
+
+  if (!user) return <p>Login to check your rentals</p>;
+
+  if (rentals.length === 0) return <p>No Rentals found</p>;
+
   return (
     <>
       <TableContainer>
