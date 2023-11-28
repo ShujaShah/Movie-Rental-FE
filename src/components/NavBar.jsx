@@ -12,9 +12,11 @@ import ColorModeSwitch from './ColorModeSwitch';
 import SearchInput from './SearchInput';
 import { Link } from 'react-router-dom';
 import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
+
 const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
   const isLoggedIn = !!user;
-
+  const navigate = useNavigate();
   return (
     <>
       <HStack padding="10px">
@@ -36,6 +38,11 @@ const NavBar = ({ onSearch, user, HandleLogout, HandleProfile }) => {
               <MenuList>
                 {user.role === 'customer' && (
                   <MenuItem onClick={HandleProfile}>Profile</MenuItem>
+                )}
+                {user.role === 'customer' && (
+                  <MenuItem onClick={() => navigate('/rentals')}>
+                    Rentals
+                  </MenuItem>
                 )}
                 <MenuItem onClick={HandleLogout}>Logout</MenuItem>
               </MenuList>

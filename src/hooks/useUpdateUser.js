@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import apiClient from '../services/api-client';
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const useUpdateUser = (_id) => {
   const [isLoading, setIsLoading] = useState(false);
   const [updateUser, setUpdateUser] = useState(null);
   const [initialUser, setInitialUser] = useState(null);
   const [rentals, setRentals] = useState([]);
+
   const toast = useToast();
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('x-auth-token');
   const config = {
@@ -81,7 +84,13 @@ const useUpdateUser = (_id) => {
         });
       });
   };
-  return { updateUser, initialUser, handleSubmit, isLoading, rentals };
+  return {
+    updateUser,
+    initialUser,
+    handleSubmit,
+    isLoading,
+    rentals,
+  };
 };
 
 export default useUpdateUser;
