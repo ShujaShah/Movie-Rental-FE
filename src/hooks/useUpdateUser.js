@@ -6,7 +6,16 @@ const useUpdateUser = (_id) => {
   const [isLoading, setIsLoading] = useState(false);
   const [updateUser, setUpdateUser] = useState(null);
   const [initialUser, setInitialUser] = useState(null);
+  const [rentals, setRentals] = useState([]);
   const toast = useToast();
+
+  const token = localStorage.getItem('x-auth-token');
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': token,
+    },
+  };
 
   useEffect(() => {
     if (!_id) {
@@ -21,6 +30,24 @@ const useUpdateUser = (_id) => {
         setIsLoading(false);
       })
       .catch((error) => {
+        setIsLoading(false);
+        console.error('Error:', error.response.data);
+      });
+  }, [_id]);
+
+  useEffect(() => {
+    if (!_id) {
+      return;
+    }
+    setIsLoading(true);
+    const res = apiClient
+      .get(`/rentals/customer-rental/${_id}`, config)
+      .then((res) => {
+        setRentals(res.data);
+        console.log('here is the data relate to rentals', res.data);
+        setIsLoading(false);
+      })
+      .then((error) => {
         setIsLoading(false);
         console.error('Error:', error.response.data);
       });
@@ -54,7 +81,7 @@ const useUpdateUser = (_id) => {
         });
       });
   };
-  return { updateUser, initialUser, handleSubmit, isLoading };
+  return { updateUser, initialUser, handleSubmit, isLoading, rentals };
 };
 
 export default useUpdateUser;

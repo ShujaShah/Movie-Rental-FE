@@ -17,7 +17,9 @@ const Profile = () => {
   const { user } = useUser();
 
   const _id = user?.profile._id;
-  const { handleSubmit, initialUser, isLoading } = useUpdateUser(_id);
+  const { handleSubmit, initialUser, isLoading, rentals } = useUpdateUser(_id);
+
+  console.log('from the component', rentals);
 
   const initialEmail = initialUser?.email;
   const initialName = initialUser?.name;
@@ -113,6 +115,13 @@ const Profile = () => {
               </FormControl>
             </fieldset>
           </form>{' '}
+        </Box>
+        <Box>
+          {rentals?.map((rental) => (
+            <ul>
+              <li key={rental._id}>{rental.movie.title}</li>
+            </ul>
+          ))}
         </Box>
       </HStack>
     </>
