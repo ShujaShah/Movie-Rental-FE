@@ -30,8 +30,14 @@ const useUser = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': token,
+      },
+    };
     const res = apiClient
-      .get('/users/me', headerConfig)
+      .get('/users/me', config)
       .then((res) => {
         setUser(res.data);
         setIsLoading(false);
