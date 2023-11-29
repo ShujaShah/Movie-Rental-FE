@@ -18,7 +18,7 @@ const useMovie = (_id) => {
           setLoading(false);
         }
       });
-  }, [_id]);
+  }, [_id, movie]);
   return { movie, loading, error };
 };
 

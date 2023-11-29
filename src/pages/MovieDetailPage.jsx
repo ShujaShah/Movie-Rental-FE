@@ -26,9 +26,6 @@ const MovieDetailsPage = () => {
 
   const { handleRental, rental, isLoading } = useRental(customerId, movieId);
 
-  // console.log('customer id is::::::::', customerId);
-  // console.log('movie id is :::::::::', movieId);
-
   return (
     <>
       <NavBar

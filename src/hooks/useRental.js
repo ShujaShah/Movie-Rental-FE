@@ -1,9 +1,10 @@
 import apiClient from '../services/api-client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import headerConfig from '../services/header-config';
 
 const useRental = (customerId, movieId) => {
+  const [movie, setMovie] = useState({});
   const [rental, setRental] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,6 +17,10 @@ const useRental = (customerId, movieId) => {
       .then((res) => {
         console.log('Post request for rentals', res.data);
         setRental(res.data);
+        apiClient(`/movies/${movieId}`).then((res) => {
+          setMovie(res.data);
+          setIsLoading(false);
+        });
         setIsLoading(false);
         toast({
           title: 'Success',
