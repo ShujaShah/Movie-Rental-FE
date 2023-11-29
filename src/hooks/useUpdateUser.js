@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import apiClient from '../services/api-client';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import headerConfig from '../services/header-config';
 
 const useUpdateUser = (_id) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,14 +12,6 @@ const useUpdateUser = (_id) => {
 
   const toast = useToast();
   const navigate = useNavigate();
-
-  const token = localStorage.getItem('x-auth-token');
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      'x-auth-token': token,
-    },
-  };
 
   useEffect(() => {
     if (!_id) {
@@ -44,7 +37,7 @@ const useUpdateUser = (_id) => {
     }
     setIsLoading(true);
     const res = apiClient
-      .get(`/rentals/customer-rental/${_id}`, config)
+      .get(`/rentals/customer-rental/${_id}`, headerConfig)
       .then((res) => {
         setRentals(res.data);
         console.log('here is the data relate to rentals', res.data);

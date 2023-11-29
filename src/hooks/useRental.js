@@ -1,24 +1,18 @@
 import apiClient from '../services/api-client';
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
+import headerConfig from '../services/header-config';
 
 const useRental = (customerId, movieId) => {
   const [rental, setRental] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const token = localStorage.getItem('x-auth-token');
-  const toast = useToast();
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      'x-auth-token': token,
-    },
-  };
+  const toast = useToast();
 
   const handleRental = () => {
     setIsLoading(true);
     const res = apiClient
-      .post('/rentals', { customerId, movieId }, config)
+      .post('/rentals', { customerId, movieId }, headerConfig)
       .then((res) => {
         console.log('Post request for rentals', res.data);
         setRental(res.data);

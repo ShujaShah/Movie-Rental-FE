@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import apiClient from '../services/api-client';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import headerConfig from '../services/header-config';
 
 const useUser = () => {
   const toast = useToast();
@@ -29,14 +30,8 @@ const useUser = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': token,
-      },
-    };
     const res = apiClient
-      .get('/users/me', config)
+      .get('/users/me', headerConfig)
       .then((res) => {
         setUser(res.data);
         setIsLoading(false);
