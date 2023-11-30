@@ -6,7 +6,9 @@ const useMovie = (_id) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchMovieData = () => {
+    setLoading(true);
+
     apiClient(`/movies/${_id}`)
       .then((res) => {
         setMovie(res.data);
@@ -14,12 +16,17 @@ const useMovie = (_id) => {
       })
       .catch((error) => {
         if (error.response) {
-          setError(error.response.data.message) || 'An Error Occurred...';
+          setError(error.response.data.message || 'An Error Occurred...');
           setLoading(false);
         }
       });
-  }, [_id, movie]);
-  return { movie, loading, error };
+  };
+
+  useEffect(() => {
+    fetchMovieData();
+  }, [_id]);
+
+  return { movie, loading, error, fetchMovieData };
 };
 
 export default useMovie;

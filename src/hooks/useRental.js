@@ -1,6 +1,7 @@
 import apiClient from '../services/api-client';
 import { useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const useRental = (customerId, movieId) => {
   const [movie, setMovie] = useState({});
@@ -8,6 +9,7 @@ const useRental = (customerId, movieId) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const token = localStorage.getItem('x-auth-token');
+  const navigate = useNavigate();
 
   const config = {
     headers: {

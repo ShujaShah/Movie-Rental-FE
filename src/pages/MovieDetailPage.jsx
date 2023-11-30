@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useMovie from '../hooks/useMovie';
 
@@ -17,7 +17,7 @@ import useRental from '../hooks/useRental';
 
 const MovieDetailsPage = () => {
   const { _id } = useParams();
-  const { movie, loading, error } = useMovie(_id);
+  const { movie, loading, error, fetchMovieData } = useMovie(_id);
 
   const { onSearch, user, HandleLogout, HandleProfile } = useUser();
 
@@ -25,6 +25,13 @@ const MovieDetailsPage = () => {
   const movieId = movie?._id;
 
   const { handleRental, rental, isLoading } = useRental(customerId, movieId);
+
+  const handleRentNow = async () => {
+    await handleRental();
+    setTimeout(() => {
+      fetchMovieData(); // Manually refresh movie data after rental
+    }, 1000);
+  };
 
   return (
     <>
@@ -45,7 +52,7 @@ const MovieDetailsPage = () => {
           <Text>Genre: {movie.genre?.name}</Text>
           <Text>Number in Stock: {movie.numberInStock}</Text>
           <Text>Daily Rental Rate: ${movie.dailyRentalRate}.00</Text>
-          <Button mt={5} variant="outline" onClick={handleRental}>
+          <Button mt={5} variant="outline" onClick={handleRentNow}>
             Rent Now
           </Button>
         </GridItem>
