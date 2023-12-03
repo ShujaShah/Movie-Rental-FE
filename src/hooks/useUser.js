@@ -42,9 +42,9 @@ const useUser = () => {
         setUser(res.data);
         setIsLoading(false);
       })
-      .then((error) => {
+      .catch((error) => {
         setIsLoading(false);
-        console.error('Error:', error.response.data);
+        console.error('Error:', error?.response?.data);
       });
   }, [token]);
 
