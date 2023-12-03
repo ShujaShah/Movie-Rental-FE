@@ -2,14 +2,17 @@ import apiClient from '../services/api-client';
 import { useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import useUser from './useUser';
+import useMovie from './useMovie';
 
-const useRental = (customerId, movieId) => {
+const useRental = () => {
   const [movie, setMovie] = useState({});
-  const [rental, setRental] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [rental, setRental] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const toast = useToast();
 
   const token = localStorage.getItem('x-auth-token');
-  const navigate = useNavigate();
 
   const config = {
     headers: {
@@ -18,20 +21,14 @@ const useRental = (customerId, movieId) => {
     },
   };
 
-  const toast = useToast();
-
   const handleRental = () => {
-    setIsLoading(true);
-    const res = apiClient
+    setLoading(true);
+    apiClient
       .post('/rentals', { customerId, movieId }, config)
       .then((res) => {
         console.log('Post request for rentals', res.data);
         setRental(res.data);
-        apiClient(`/movies/${movieId}`).then((res) => {
-          setMovie(res.data);
-          setIsLoading(false);
-        });
-        setIsLoading(false);
+        setLoading(false);
         toast({
           title: 'Success',
           description: `Order Successfully created...`,
@@ -39,9 +36,20 @@ const useRental = (customerId, movieId) => {
           duration: 3000,
           isClosable: true,
         });
+        apiClient(`/movies/${_id}`)
+          .then((res) => {
+            console.log('i am here', _id);
+            setMovie(res.data);
+          })
+          .catch((error) => {
+            console.error(
+              'Error fetching movie details:',
+              error.response?.data || 'An Error Occurred...'
+            );
+          });
       })
       .catch((error) => {
-        setIsLoading(false);
+        setLoading(false);
         console.error('Error:', error.response.data);
         toast({
           title: 'Error',
@@ -52,7 +60,7 @@ const useRental = (customerId, movieId) => {
         });
       });
   };
-  return { handleRental, rental, isLoading };
+  return { movie, error, loading, handleRental, rental };
 };
 
 export default useRental;

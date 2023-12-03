@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useMovie from '../hooks/useMovie';
-
 import {
   Heading,
   Text,
@@ -13,24 +11,16 @@ import {
 } from '@chakra-ui/react';
 import NavBar from '../components/NavBar';
 import useUser from '../hooks/useUser';
-import useRental from '../hooks/useRental';
 
 const MovieDetailsPage = () => {
   const { _id } = useParams();
-  const { movie, loading, error, fetchMovieData } = useMovie(_id);
 
   const { onSearch, user, HandleLogout, HandleProfile } = useUser();
 
-  const customerId = user?.profile?._id;
-  const movieId = movie?._id;
-
-  const { handleRental, rental, isLoading } = useRental(customerId, movieId);
+  const { movie, error, loading, handleRental } = useMovie(_id);
 
   const handleRentNow = async () => {
     await handleRental();
-    setTimeout(() => {
-      fetchMovieData(); // Manually refresh movie data after rental
-    }, 1000);
   };
 
   return (
@@ -42,6 +32,7 @@ const MovieDetailsPage = () => {
         HandleProfile={HandleProfile}
       />
       {loading && <Spinner />}
+      {error && <Spinner />}
       <Grid margin={10} templateColumns="repeat(3, 1fr)" gap={6}>
         <GridItem>
           <Image src={movie.movieBanner} width={300} />
