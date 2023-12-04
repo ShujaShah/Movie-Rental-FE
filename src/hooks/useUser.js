@@ -44,11 +44,12 @@ const useUser = () => {
       })
       .catch((error) => {
         setIsLoading(false);
+        setError(error.response.data);
         console.error('Error:', error?.response?.data);
       });
   }, [token]);
 
-  return { user, HandleLogout, isloading, HandleProfile };
+  return { user, HandleLogout, isloading, HandleProfile, error };
 };
 
 export default useUser;
