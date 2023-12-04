@@ -8,18 +8,8 @@ import {
   MenuButton,
   MenuList,
 } from '@chakra-ui/react';
-import NavHoverBox from './NavHoverBox';
-import { useNavigate } from 'react-router-dom';
 
-export default function NavItem({
-  icon,
-  title,
-  description,
-  active,
-  navSize,
-  onClick,
-}) {
-  const navigate = useNavigate();
+export default function NavItem({ icon, title, active, navSize, onClick }) {
   const handleItemClick = () => {
     onClick && onClick();
   };
@@ -52,9 +42,6 @@ export default function NavItem({
             </Flex>
           </MenuButton>
         </Link>
-        <MenuList py={0} border="none" w={200} h={200} ml={5}>
-          <NavHoverBox title={title} icon={icon} description={description} />
-        </MenuList>
       </Menu>
     </Flex>
   );

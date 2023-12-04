@@ -8,6 +8,8 @@ import SignupPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage';
 import RentalsPage from './pages/RentalsPage';
 import Dashboard from './pages/AdminPages/Dashboard';
+import AdminLayoutPage from './pages/AdminLayoutPage';
+import Login from './components/Login';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +39,11 @@ const router = createBrowserRouter([
   },
   {
     path: 'admin-dashboard',
-    element: <Dashboard />,
+    element: <AdminLayoutPage />,
+    children: [
+      { index: true, element: <Dashboard /> },
+      { path: 'login', element: <Login /> },
+    ],
   },
 ]);
 
