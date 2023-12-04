@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/admin-components/sidebar';
 
-const AdminLayoutPage = ({ children }) => {
+const AdminLayoutPage = () => {
   return (
     <div style={{ display: 'flex' }}>
       <Sidebar />

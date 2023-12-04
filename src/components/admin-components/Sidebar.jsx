@@ -59,14 +59,14 @@ export default function Sidebar() {
           navSize={navSize}
           icon={FiCalendar}
           title="Dashboard"
-          onClick={() => handleNavItemClick('/register')}
+          onClick={() => handleNavItemClick('/admin-dashboard/register')}
           active
         />
         <NavItem
           navSize={navSize}
           icon={FiUser}
           title="Users"
-          onClick={() => handleNavItemClick('/register')}
+          onClick={() => handleNavItemClick('/admin-dashboard/login')}
         />
         <NavItem navSize={navSize} icon={IoPawOutline} title="Movies" />
         <NavItem navSize={navSize} icon={FiDollarSign} title="Genres" />
