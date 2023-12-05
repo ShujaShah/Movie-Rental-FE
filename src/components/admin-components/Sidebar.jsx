@@ -88,12 +88,6 @@ export default function Sidebar({ HandleLogout, user }) {
           onClick={() => handleNavItemClick('/admin-dashboard/orders')}
           active={location.pathname === '/admin-dashboard/orders'}
         />
-        {/* <NavItem
-          navSize={navSize}
-          icon={FiBriefcase}
-          title="Logout"
-          onClick={HandleLogout}
-        /> */}
       </Flex>
       <Button onClick={HandleLogout}>Logout</Button>
 
