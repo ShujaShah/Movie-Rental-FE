@@ -59,8 +59,8 @@ export default function Sidebar() {
           navSize={navSize}
           icon={FiCalendar}
           title="Dashboard"
-          onClick={() => handleNavItemClick('/admin-dashboard/')}
-          active={location.pathname === '/admin-dashboard/'}
+          onClick={() => handleNavItemClick('/admin-dashboard')}
+          active={location.pathname === '/admin-dashboard'}
         />
         <NavItem
           navSize={navSize}
