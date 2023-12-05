@@ -18,7 +18,7 @@ import {
 } from 'react-icons/fi';
 import { IoPawOutline } from 'react-icons/io5';
 import NavItem from './NavItem';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState('large');
@@ -59,18 +59,37 @@ export default function Sidebar() {
           navSize={navSize}
           icon={FiCalendar}
           title="Dashboard"
-          onClick={() => handleNavItemClick('/admin-dashboard/register')}
-          active
+          onClick={() => handleNavItemClick('/admin-dashboard/')}
+          active={location.pathname === '/admin-dashboard/'}
         />
         <NavItem
           navSize={navSize}
           icon={FiUser}
           title="Users"
-          onClick={() => handleNavItemClick('/admin-dashboard/login')}
+          onClick={() => handleNavItemClick('/admin-dashboard/users')}
+          active={location.pathname === '/admin-dashboard/users'}
         />
-        <NavItem navSize={navSize} icon={IoPawOutline} title="Movies" />
-        <NavItem navSize={navSize} icon={FiDollarSign} title="Genres" />
-        <NavItem navSize={navSize} icon={FiBriefcase} title="Orders" />
+        <NavItem
+          navSize={navSize}
+          icon={IoPawOutline}
+          title="Movies"
+          onClick={() => handleNavItemClick('/admin-dashboard/movies')}
+          active={location.pathname === '/admin-dashboard/movies'}
+        />
+        <NavItem
+          navSize={navSize}
+          icon={FiDollarSign}
+          title="Genres"
+          onClick={() => handleNavItemClick('/admin-dashboard/genres')}
+          active={location.pathname === '/admin-dashboard/genres'}
+        />
+        <NavItem
+          navSize={navSize}
+          icon={FiBriefcase}
+          title="Orders"
+          onClick={() => handleNavItemClick('/admin-dashboard/orders')}
+          active={location.pathname === '/admin-dashboard/orders'}
+        />
       </Flex>
 
       <Flex

@@ -7,9 +7,12 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage';
 import RentalsPage from './pages/RentalsPage';
-import Dashboard from './pages/AdminPages/Dashboard';
 import AdminLayoutPage from './pages/AdminLayoutPage';
-import Login from './components/Login';
+import Dashboard from './components/admin-components/Dashboard';
+import Users from './components/admin-components/Users';
+import Movies from './components/admin-components/Movies';
+import Genres from './components/admin-components/Genres';
+import Orders from './components/admin-components/Orders';
 
 const router = createBrowserRouter([
   {
@@ -42,8 +45,10 @@ const router = createBrowserRouter([
     element: <AdminLayoutPage />,
     children: [
       { index: true, element: <Dashboard /> },
-      { path: 'login', element: <Login /> },
-      { path: 'register', element: <SignupPage /> },
+      { path: 'users', element: <Users /> },
+      { path: 'movies', element: <Movies /> },
+      { path: 'genres', element: <Genres /> },
+      { path: 'orders', element: <Orders /> },
     ],
   },
 ]);

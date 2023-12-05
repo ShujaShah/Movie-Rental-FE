@@ -22,10 +22,15 @@ export default function NavItem({ icon, title, active, navSize, onClick }) {
     >
       <Menu placement="right">
         <Link
-          backgroundColor={active && '#AEC8CA'}
+          backgroundColor={active && '#8d2dab'}
+          color={active && '#fff '}
           p={3}
           borderRadius={8}
-          _hover={{ textDecor: 'none', backgroundColor: '#AEC8CA' }}
+          _hover={{
+            textDecor: 'none',
+            color: '#fff',
+            backgroundColor: '#8d2dab',
+          }}
           w={navSize == 'large' && '100%'}
           onClick={handleItemClick}
         >
@@ -34,7 +39,8 @@ export default function NavItem({ icon, title, active, navSize, onClick }) {
               <Icon
                 as={icon}
                 fontSize="xl"
-                color={active ? '#82AAAD' : 'gray.500'}
+                color={active ? '#fff' : '#000'}
+                _hover={{ textDecor: 'none', color: '#fff' }}
               />
               <Text ml={5} display={navSize == 'small' ? 'none' : 'flex'}>
                 {title}
