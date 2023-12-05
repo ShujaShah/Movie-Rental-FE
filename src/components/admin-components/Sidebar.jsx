@@ -8,19 +8,17 @@ import {
   Heading,
   Button,
 } from '@chakra-ui/react';
-import {
-  FiMenu,
-  FiHome,
-  FiCalendar,
-  FiUser,
-  FiDollarSign,
-  FiBriefcase,
-} from 'react-icons/fi';
-import { IoPawOutline } from 'react-icons/io5';
+import { FiMenu, FiSquare } from 'react-icons/fi';
+
+import { BiCameraMovie } from 'react-icons/bi';
+import { CiFilter } from 'react-icons/ci';
+import { MdProductionQuantityLimits } from 'react-icons/md';
+import { PiUsersFour } from 'react-icons/pi';
+
 import NavItem from './NavItem';
 import { useNavigate } from 'react-router-dom';
 
-export default function Sidebar({ HandleLogout }) {
+export default function Sidebar({ HandleLogout, user }) {
   const [navSize, changeNavSize] = useState('large');
   const navigate = useNavigate();
   const handleNavItemClick = (path) => {
@@ -57,35 +55,35 @@ export default function Sidebar({ HandleLogout }) {
         />
         <NavItem
           navSize={navSize}
-          icon={FiCalendar}
+          icon={FiSquare}
           title="Dashboard"
           onClick={() => handleNavItemClick('/admin-dashboard')}
           active={location.pathname === '/admin-dashboard'}
         />
         <NavItem
           navSize={navSize}
-          icon={FiUser}
+          icon={PiUsersFour}
           title="Users"
           onClick={() => handleNavItemClick('/admin-dashboard/users')}
           active={location.pathname === '/admin-dashboard/users'}
         />
         <NavItem
           navSize={navSize}
-          icon={IoPawOutline}
+          icon={BiCameraMovie}
           title="Movies"
           onClick={() => handleNavItemClick('/admin-dashboard/movies')}
           active={location.pathname === '/admin-dashboard/movies'}
         />
         <NavItem
           navSize={navSize}
-          icon={FiDollarSign}
+          icon={CiFilter}
           title="Genres"
           onClick={() => handleNavItemClick('/admin-dashboard/genres')}
           active={location.pathname === '/admin-dashboard/genres'}
         />
         <NavItem
           navSize={navSize}
-          icon={FiBriefcase}
+          icon={MdProductionQuantityLimits}
           title="Orders"
           onClick={() => handleNavItemClick('/admin-dashboard/orders')}
           active={location.pathname === '/admin-dashboard/orders'}
@@ -115,9 +113,9 @@ export default function Sidebar({ HandleLogout }) {
             display={navSize == 'small' ? 'none' : 'flex'}
           >
             <Heading as="h3" size="sm">
-              Sylwia Weller
+              {user.name}
             </Heading>
-            <Text color="gray">Admin</Text>
+            <Text color="gray">{user.role}</Text>
           </Flex>
         </Flex>
       </Flex>

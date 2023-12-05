@@ -11,7 +11,7 @@ const AdminLayoutPage = () => {
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Sidebar HandleLogout={HandleLogout} />
+        <Sidebar HandleLogout={HandleLogout} user={user} />
         <div style={{ marginLeft: '200px', padding: '20px', flexGrow: 1 }}>
           <Outlet />
         </div>
