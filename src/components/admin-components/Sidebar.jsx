@@ -6,6 +6,7 @@ import {
   Divider,
   Avatar,
   Heading,
+  Button,
 } from '@chakra-ui/react';
 import {
   FiMenu,
@@ -14,13 +15,12 @@ import {
   FiUser,
   FiDollarSign,
   FiBriefcase,
-  FiSettings,
 } from 'react-icons/fi';
 import { IoPawOutline } from 'react-icons/io5';
 import NavItem from './NavItem';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function Sidebar() {
+export default function Sidebar({ HandleLogout }) {
   const [navSize, changeNavSize] = useState('large');
   const navigate = useNavigate();
   const handleNavItemClick = (path) => {
@@ -90,7 +90,14 @@ export default function Sidebar() {
           onClick={() => handleNavItemClick('/admin-dashboard/orders')}
           active={location.pathname === '/admin-dashboard/orders'}
         />
+        {/* <NavItem
+          navSize={navSize}
+          icon={FiBriefcase}
+          title="Logout"
+          onClick={HandleLogout}
+        /> */}
       </Flex>
+      <Button onClick={HandleLogout}>Logout</Button>
 
       <Flex
         p="5%"

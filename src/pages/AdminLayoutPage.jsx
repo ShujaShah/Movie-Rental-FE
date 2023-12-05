@@ -4,14 +4,14 @@ import useUser from '../hooks/useUser';
 import { Text } from '@chakra-ui/react';
 
 const AdminLayoutPage = () => {
-  const { user } = useUser();
+  const { user, HandleLogout } = useUser();
 
   if (user?.role !== 'admin')
     return <Text>You donot have permission to view this page</Text>;
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Sidebar />
+        <Sidebar HandleLogout={HandleLogout} />
         <div style={{ marginLeft: '200px', padding: '20px', flexGrow: 1 }}>
           <Outlet />
         </div>
