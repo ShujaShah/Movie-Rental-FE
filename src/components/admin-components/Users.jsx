@@ -15,7 +15,7 @@ const Users = () => {
   const { users } = useUsers();
   console.log('here is the user details', users);
 
-  if (!users) return <p>Login to check your rentals</p>;
+  if (!users) return <p>Login to see users...</p>;
 
   if (users.length === 0) return <p>No users found</p>;
 
@@ -36,8 +36,8 @@ const Users = () => {
             {users.map((user) => (
               <Tr key={user._id}>
                 <Td>{user.name}</Td>
-                <Td>{user.email || user?.name}</Td>
-                <Td>{user?.role}</Td>
+                <Td>{user.email}</Td>
+                <Td>{user.role}</Td>
                 <Td>{user.createdAt}</Td>
               </Tr>
             ))}
