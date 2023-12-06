@@ -1,70 +1,48 @@
-import React, { useEffect } from 'react';
-
+import React, { useRef, useReducer } from 'react';
 import {
+  Button,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  Spinner,
-} from '@chakra-ui/react';
-import {
-  useDisclosure,
   FormControl,
   FormLabel,
   Input,
-  Button,
+  Spinner,
 } from '@chakra-ui/react';
 
-import useSignup from '../../hooks/useSignup';
 import {
   SignupReducer,
   registerInitialState,
 } from '../../state-management/reducers/signupReducer';
 
-const CreateUser = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = React.useRef();
-  const finalRef = React.useRef();
+const CreateUser = ({ isOpen, onClose, handleSubmitAdmin, isloading }) => {
+  const initialRef = useRef();
+  const finalRef = useRef();
 
-  const [state, dispatch] = React.useReducer(
-    SignupReducer,
-    registerInitialState
-  );
-
-  const { handleSubmit, register, handleSubmitAdmin, isLoading, usersData } =
-    useSignup();
-
-  useEffect(() => {
-    console.log('user registered successfullyyyy.....');
-    onClose(); //Close the modal after clicking on register
-  }, [register]);
+  const [state, dispatch] = useReducer(SignupReducer, registerInitialState);
 
   function handleEmail(e) {
-    //setEmail(e.target.value);
     dispatch({ type: 'SET_EMAIL', payload: e.target.value });
   }
 
   function handlePassword(e) {
-    //setPassword(e.target.value)
     dispatch({ type: 'SET_PASSWORD', payload: e.target.value });
   }
 
   function handleName(e) {
-    //setName(e.target.value)
     dispatch({ type: 'SET_NAME', payload: e.target.value });
   }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    //handleSubmitAdmin(state.email, state.name, state.password);
-    await handleSubmit(state.email, state.name, state.password);
+    await handleSubmitAdmin(state.email, state.name, state.password);
   };
 
   return (
     <>
-      <Button onClick={onOpen}>Add User</Button>
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
@@ -110,7 +88,7 @@ const CreateUser = () => {
                   border="1px solid #8d2dab"
                   type="submit"
                 >
-                  {isLoading ? <Spinner /> : 'Submit'}
+                  {isloading ? <Spinner /> : 'Submit'}
                 </Button>
               </FormControl>
             </form>

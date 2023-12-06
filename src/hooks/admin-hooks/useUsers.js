@@ -26,7 +26,6 @@ const useUser = () => {
           duration: 3000,
           isClosable: true,
         });
-        // navigate('/');
       })
       .catch((error) => {
         console.error('Error:', error.response.data);
@@ -61,7 +60,7 @@ const useUser = () => {
         setError(error.response.data);
         console.error('Error:', error?.response?.data);
       });
-  }, [token, register]);
+  }, [register]);
 
   return { users, isloading, register, handleSubmitAdmin, error };
 };
