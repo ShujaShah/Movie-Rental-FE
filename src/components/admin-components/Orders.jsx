@@ -14,6 +14,8 @@ import {
 const Orders = () => {
   const { rentals } = useRentals();
   console.log('here are the rentals', rentals);
+
+  if (rentals.length === 0) return <p>No users found</p>;
   return (
     <>
       <TableContainer pt={10}>
@@ -24,15 +26,17 @@ const Orders = () => {
               <Th>Email</Th>
               <Th>Phone</Th>
               <Th>Movie</Th>
+              <Th>Date</Th>
             </Tr>
           </Thead>
           <Tbody>
-            {rentals.map((rental) => (
+            {rentals.rentals.map((rental) => (
               <Tr key={rental._id}>
                 <Td>{rental.customer.name}</Td>
                 <Td>{rental.customer.email}</Td>
                 <Td>{rental.customer.phone}</Td>
                 <Td>{rental.movie.title}</Td>
+                <Td>{rental.dateOut}</Td>
               </Tr>
             ))}
           </Tbody>

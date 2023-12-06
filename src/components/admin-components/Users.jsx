@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useUsers from '../../hooks/admin-hooks/useUsers';
 
 import {
@@ -11,9 +11,12 @@ import {
   TableContainer,
   Button,
 } from '@chakra-ui/react';
+import CreateUser from './CreateUser';
+import useSignup from '../../hooks/useSignup';
+
 const Users = () => {
   const { users } = useUsers();
-  console.log('here is the user details', users);
+  const { loading, error } = useSignup();
 
   if (!users) return <p>Login to see users...</p>;
 
@@ -21,7 +24,10 @@ const Users = () => {
 
   return (
     <>
-      <Button>Add User</Button>
+      {loading && <Spinner />}
+      {error && <Spinner />}
+      {/* <Button>Add User</Button> */}
+      <CreateUser />
       <TableContainer pt={10}>
         <Table variant="simple">
           <Thead>

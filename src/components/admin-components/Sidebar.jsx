@@ -9,6 +9,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { FiMenu, FiSquare } from 'react-icons/fi';
+import { PiUserCircleThin } from 'react-icons/pi';
 
 import { BiCameraMovie } from 'react-icons/bi';
 import { CiFilter } from 'react-icons/ci';
@@ -100,7 +101,8 @@ export default function Sidebar({ HandleLogout, user }) {
       >
         <Divider display={navSize == 'small' ? 'none' : 'flex'} />
         <Flex mt={4} align="center">
-          <Avatar size="sm" src="avatar-1.jpg" />
+          <PiUserCircleThin fontSize={50} color="#ccd1d4" />
+          {/* <Avatar size="sm" src="avatar-1.jpg" /> */}
           <Flex
             flexDir="column"
             ml={4}

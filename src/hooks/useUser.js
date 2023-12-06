@@ -7,7 +7,7 @@ const useUser = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const [isloading, setIsLoading] = useState(false);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   const [error, setError] = useState('');
 
   const token = localStorage.getItem('x-auth-token');
