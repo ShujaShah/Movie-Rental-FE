@@ -36,7 +36,10 @@ const CreateGenre = ({ isOpen, onClose, handleSubmitAdmin, isloading }) => {
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalOverlay />
+        <ModalOverlay
+          bg="blackAlpha.300"
+          backdropFilter="blur(10px) hue-rotate(90deg)"
+        />
         <ModalContent>
           <ModalHeader>Enter Genres</ModalHeader>
           <ModalCloseButton />
@@ -53,6 +56,7 @@ const CreateGenre = ({ isOpen, onClose, handleSubmitAdmin, isloading }) => {
               </FormControl>
               <FormControl>
                 <Button
+                  mt={5}
                   variant="outline"
                   border="1px solid #8d2dab"
                   type="submit"

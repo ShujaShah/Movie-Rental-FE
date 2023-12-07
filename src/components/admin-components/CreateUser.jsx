@@ -49,7 +49,10 @@ const CreateUser = ({ isOpen, onClose, handleSubmitAdmin, isloading }) => {
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalOverlay />
+        <ModalOverlay
+          bg="blackAlpha.300"
+          backdropFilter="blur(10px) hue-rotate(90deg)"
+        />
         <ModalContent>
           <ModalHeader>Enter Details</ModalHeader>
           <ModalCloseButton />
