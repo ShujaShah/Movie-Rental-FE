@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import apiClient from '../../services/api-client';
-import { Toast, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 
 const useGenre = () => {
   const [genre, setGenre] = useState([]);
