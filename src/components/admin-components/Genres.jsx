@@ -11,16 +11,6 @@ import {
   TableContainer,
   Button,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
-  Spinner,
 } from '@chakra-ui/react';
 
 import CreateGenre from './CreateGenre';
