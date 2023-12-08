@@ -1,4 +1,4 @@
-import { React, useRef } from 'react';
+import { React, useEffect, useRef, useState } from 'react';
 import useMovies from '../../hooks/useMovies';
 import {
   Modal,
@@ -12,6 +12,7 @@ import {
   Input,
   Spinner,
   useDisclosure,
+  Select,
 } from '@chakra-ui/react';
 
 import {
@@ -24,25 +25,51 @@ import {
   TableContainer,
   Button,
 } from '@chakra-ui/react';
+import useGenre from '../../hooks/admin-hooks/useGenre';
+import useAddMovie from '../../hooks/admin-hooks/useAddMovie';
 
 const Movies = () => {
   const { movies, isLoading } = useMovies();
+  const { genre } = useGenre();
+
+  const [movieData, setMovieData] = useState({
+    title: '',
+    numberInStock: '',
+    dailyRentalRate: '',
+    slug: '',
+    genre: '',
+    movieBanner: '',
+  });
+
+  const { isloading, error, handleAdminSubmit, createMovie } = useAddMovie();
+
+  //=========================================use below code for custom component=================================//
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    onClose();
+  }, [createMovie]);
 
   const initialRef = useRef();
   const finalRef = useRef();
 
-  function handleName(e) {
-    setName(e.target.value);
+  function handleMovieData(e) {
+    setMovieData({
+      ...movieData,
+      [e.target.name]: e.target.value,
+    });
   }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await handleSubmitAdmin(name);
+    await handleAdminSubmit(movieData);
   };
-  console.log('here are the movies data', movies);
+
+  //==========================================end of code============================================================
   return (
     <>
+      {isloading && <Spinner />}
+      {error && <p>Something went wrong</p>}
       <Button onClick={onOpen}>Add Movies</Button>
       <Modal
         initialFocusRef={initialRef}
@@ -60,12 +87,63 @@ const Movies = () => {
           <ModalBody pb={6}>
             <form onSubmit={handleFormSubmit}>
               <FormControl mt={4}>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Title</FormLabel>
                 <Input
                   type="text"
-                  name="name"
-                  value={name}
-                  onChange={handleName}
+                  name="title"
+                  value={movieData.title}
+                  onChange={handleMovieData}
+                />
+              </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Slug</FormLabel>
+                <Input
+                  type="text"
+                  name="slug"
+                  value={movieData.slug}
+                  onChange={handleMovieData}
+                />
+              </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Stock</FormLabel>
+                <Input
+                  type="number"
+                  name="numberInStock"
+                  value={movieData.numberInStock}
+                  onChange={handleMovieData}
+                />
+              </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Rent</FormLabel>
+                <Input
+                  type="number"
+                  name="dailyRentalRate"
+                  value={movieData.dailyRentalRate}
+                  onChange={handleMovieData}
+                />
+              </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Genre</FormLabel>
+                <Select
+                  placeholder="Select Genre"
+                  onChange={(e) => handleMovieData(e)}
+                  name="genre"
+                  value={movieData.genre}
+                >
+                  {genre.map((genreItem) => (
+                    <option key={genreItem._id} value={genreItem._id}>
+                      {genreItem.name}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Banner</FormLabel>
+                <Input
+                  type="text"
+                  name="movieBanner"
+                  value={movieData.movieBanner}
+                  onChange={handleMovieData}
                 />
               </FormControl>
               <FormControl>
