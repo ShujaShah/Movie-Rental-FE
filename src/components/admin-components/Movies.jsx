@@ -29,7 +29,6 @@ import useGenre from '../../hooks/admin-hooks/useGenre';
 import useAddMovie from '../../hooks/admin-hooks/useAddMovie';
 
 const Movies = () => {
-  const { movies, isLoading } = useMovies();
   const { genre } = useGenre();
 
   const [movieData, setMovieData] = useState({
@@ -41,14 +40,15 @@ const Movies = () => {
     movieBanner: '',
   });
 
-  const { isloading, error, handleAdminSubmit, createMovie } = useAddMovie();
-
+  const { isloading, error, handleAdminSubmit, createMovie, moviesList } =
+    useAddMovie();
   //=========================================use below code for custom component=================================//
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     onClose();
-  }, [createMovie]);
+  }, [moviesList]);
+  console.log('here is the list of movies', moviesList);
 
   const initialRef = useRef();
   const finalRef = useRef();
@@ -64,6 +64,10 @@ const Movies = () => {
     e.preventDefault();
     await handleAdminSubmit(movieData);
   };
+
+  if (!moviesList) return <p>Login to see users...</p>;
+
+  if (moviesList.length === 0) return <p>No Movies found</p>;
 
   //==========================================end of code============================================================
   return (
@@ -153,7 +157,7 @@ const Movies = () => {
                   border="1px solid #8d2dab"
                   type="submit"
                 >
-                  {isLoading ? <Spinner /> : 'Submit'}
+                  {isloading ? <Spinner /> : 'Submit'}
                 </Button>
               </FormControl>
             </form>
@@ -171,7 +175,7 @@ const Movies = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {movies.map((movie) => (
+            {moviesList.movies.map((movie) => (
               <Tr key={movie._id}>
                 <Td>{movie.title}</Td>
                 <Td>{movie.genre.name}</Td>

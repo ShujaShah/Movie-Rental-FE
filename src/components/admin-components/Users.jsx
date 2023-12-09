@@ -30,7 +30,7 @@ const Users = () => {
   return (
     <>
       {isloading && <Spinner />}
-      {error && <Spinner />}
+      {error && <p>Something went wrong...</p>}
       <Button onClick={onOpen}>Add User</Button>
       <CreateUser
         isOpen={isOpen}
