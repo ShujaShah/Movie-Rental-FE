@@ -39,6 +39,7 @@ const CreateUser = ({ isOpen, onClose, handleSubmitAdmin, isloading }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await handleSubmitAdmin(state.email, state.name, state.password);
+    dispatch({ type: 'RESET' });
   };
 
   return (

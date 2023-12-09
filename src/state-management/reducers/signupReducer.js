@@ -12,6 +12,8 @@ export const SignupReducer = (state, action) => {
       return { ...state, password: action.payload };
     case 'SET_NAME':
       return { ...state, name: action.payload };
+    case 'RESET':
+      return registerInitialState;
     default:
       return state;
   }

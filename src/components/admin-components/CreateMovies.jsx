@@ -47,6 +47,14 @@ const CreateMovies = ({
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await handleAdminSubmit(movieData);
+    setMovieData({
+      title: '',
+      numberInStock: '',
+      dailyRentalRate: '',
+      slug: '',
+      genre: '',
+      movieBanner: '',
+    });
   };
 
   return (
