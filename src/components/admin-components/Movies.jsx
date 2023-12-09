@@ -1,20 +1,5 @@
 import { React, useEffect, useRef, useState } from 'react';
-import useMovies from '../../hooks/useMovies';
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
-  Spinner,
-  useDisclosure,
-  Select,
-} from '@chakra-ui/react';
-
+import { Spinner, useDisclosure } from '@chakra-ui/react';
 import {
   Table,
   Thead,
@@ -25,12 +10,10 @@ import {
   TableContainer,
   Button,
 } from '@chakra-ui/react';
-import useGenre from '../../hooks/admin-hooks/useGenre';
 import useAddMovie from '../../hooks/admin-hooks/useAddMovie';
+import CreateMovies from './CreateMovies';
 
 const Movies = () => {
-  const { genre } = useGenre();
-
   const [movieData, setMovieData] = useState({
     title: '',
     numberInStock: '',
@@ -40,130 +23,30 @@ const Movies = () => {
     movieBanner: '',
   });
 
-  const { isloading, error, handleAdminSubmit, createMovie, moviesList } =
-    useAddMovie();
-  //=========================================use below code for custom component=================================//
+  const { isloading, error, handleAdminSubmit, moviesList } = useAddMovie();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     onClose();
   }, [moviesList]);
-  console.log('here is the list of movies', moviesList);
-
-  const initialRef = useRef();
-  const finalRef = useRef();
-
-  function handleMovieData(e) {
-    setMovieData({
-      ...movieData,
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    await handleAdminSubmit(movieData);
-  };
 
   if (!moviesList) return <p>Login to see users...</p>;
 
   if (moviesList.length === 0) return <p>No Movies found</p>;
 
-  //==========================================end of code============================================================
   return (
     <>
       {isloading && <Spinner />}
       {error && <p>Something went wrong</p>}
       <Button onClick={onOpen}>Add Movies</Button>
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
+      <CreateMovies
+        handleAdminSubmit={handleAdminSubmit}
+        error={error}
+        isloading={isloading}
         isOpen={isOpen}
         onClose={onClose}
-      >
-        <ModalOverlay
-          bg="blackAlpha.300"
-          backdropFilter="blur(10px) hue-rotate(90deg)"
-        />
-        <ModalContent>
-          <ModalHeader>Enter Details</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <form onSubmit={handleFormSubmit}>
-              <FormControl mt={4}>
-                <FormLabel>Title</FormLabel>
-                <Input
-                  type="text"
-                  name="title"
-                  value={movieData.title}
-                  onChange={handleMovieData}
-                />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Slug</FormLabel>
-                <Input
-                  type="text"
-                  name="slug"
-                  value={movieData.slug}
-                  onChange={handleMovieData}
-                />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Stock</FormLabel>
-                <Input
-                  type="number"
-                  name="numberInStock"
-                  value={movieData.numberInStock}
-                  onChange={handleMovieData}
-                />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Rent</FormLabel>
-                <Input
-                  type="number"
-                  name="dailyRentalRate"
-                  value={movieData.dailyRentalRate}
-                  onChange={handleMovieData}
-                />
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Genre</FormLabel>
-                <Select
-                  placeholder="Select Genre"
-                  onChange={(e) => handleMovieData(e)}
-                  name="genre"
-                  value={movieData.genre}
-                >
-                  {genre.map((genreItem) => (
-                    <option key={genreItem._id} value={genreItem._id}>
-                      {genreItem.name}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Banner</FormLabel>
-                <Input
-                  type="text"
-                  name="movieBanner"
-                  value={movieData.movieBanner}
-                  onChange={handleMovieData}
-                />
-              </FormControl>
-              <FormControl>
-                <Button
-                  mt={5}
-                  variant="outline"
-                  border="1px solid #8d2dab"
-                  type="submit"
-                >
-                  {isloading ? <Spinner /> : 'Submit'}
-                </Button>
-              </FormControl>
-            </form>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      />
       <TableContainer pt={10}>
         <Table variant="simple">
           <Thead>
