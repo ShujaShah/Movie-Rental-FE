@@ -10,6 +10,7 @@ import {
   TableContainer,
   Button,
 } from '@chakra-ui/react';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import useAddMovie from '../../hooks/admin-hooks/useAddMovie';
 import CreateMovies from './CreateMovies';
 
@@ -64,6 +65,24 @@ const Movies = () => {
                 <Td>{movie.genre.name}</Td>
                 <Td>{movie.numberInStock}</Td>
                 <Td>{movie.dailyRentalRate}</Td>
+                <Td>
+                  <Button
+                    leftIcon={<EditIcon />}
+                    colorScheme="blue"
+                    variant="solid"
+                  >
+                    Edit
+                  </Button>
+                </Td>
+                <Td>
+                  <Button
+                    leftIcon={<DeleteIcon />}
+                    colorScheme="red"
+                    variant="solid"
+                  >
+                    Delete
+                  </Button>
+                </Td>
               </Tr>
             ))}
           </Tbody>

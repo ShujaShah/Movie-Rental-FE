@@ -14,6 +14,8 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+
 const Users = () => {
   const { users, isloading, error, handleSubmitAdmin } = useUsers();
 
@@ -56,6 +58,24 @@ const Users = () => {
                 <Td>{user.email}</Td>
                 <Td>{user.role}</Td>
                 <Td>{user.createdAt}</Td>
+                <Td>
+                  <Button
+                    leftIcon={<EditIcon />}
+                    colorScheme="blue"
+                    variant="solid"
+                  >
+                    Edit
+                  </Button>
+                </Td>
+                <Td>
+                  <Button
+                    leftIcon={<DeleteIcon />}
+                    colorScheme="red"
+                    variant="solid"
+                  >
+                    Delete
+                  </Button>
+                </Td>
               </Tr>
             ))}
           </Tbody>

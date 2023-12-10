@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 
 import CreateGenre from './CreateGenre';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 const Genres = () => {
   const { genre, isloading, addGenre, handleGenreSubmit } = useGenre();
@@ -50,6 +51,24 @@ const Genres = () => {
               <Tr key={genreItem?._id}>
                 <Td>{genreItem?.name}</Td>
                 <Td>{genreItem?._id}</Td>
+                <Td>
+                  <Button
+                    leftIcon={<EditIcon />}
+                    colorScheme="blue"
+                    variant="solid"
+                  >
+                    Edit
+                  </Button>
+                </Td>
+                <Td>
+                  <Button
+                    leftIcon={<DeleteIcon />}
+                    colorScheme="red"
+                    variant="solid"
+                  >
+                    Delete
+                  </Button>
+                </Td>
               </Tr>
             ))}
           </Tbody>
