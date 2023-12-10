@@ -17,7 +17,10 @@ const AlertDelete = ({ isOpen, onClose, handleDelete, cancelRef }) => {
         leastDestructiveRef={cancelRef}
         onClose={onClose}
       >
-        <AlertDialogOverlay>
+        <AlertDialogOverlay
+          bg="blackAlpha.300"
+          backdropFilter="blur(10px) hue-rotate(90deg)"
+        >
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Delete
