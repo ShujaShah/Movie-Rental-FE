@@ -17,8 +17,22 @@ import CreateGenre from './CreateGenre';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 const Genres = () => {
-  const { genre, isloading, addGenre, handleGenreSubmit } = useGenre();
+  const {
+    genre,
+    isloading,
+    addGenre,
+    handleGenreSubmit,
+    handleDeleteGenre,
+    del,
+  } = useGenre();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  console.log('here is the genre details', genre);
+
+  const handleDelete = async (genreItemId) => {
+    await handleDeleteGenre(genreItemId);
+    console.log('genre deleted successfully');
+  };
 
   useEffect(() => {
     onClose(); //Close the modal after clicking on register
@@ -62,6 +76,7 @@ const Genres = () => {
                 </Td>
                 <Td>
                   <Button
+                    onClick={() => handleDelete(genreItem._id)}
                     leftIcon={<DeleteIcon />}
                     colorScheme="red"
                     variant="solid"

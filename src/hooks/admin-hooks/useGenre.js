@@ -6,6 +6,7 @@ const useGenre = () => {
   const [genre, setGenre] = useState([]);
   const [addGenre, setAddGenre] = useState([]);
   const [isloading, setIsLoading] = useState(false);
+  const [del, setDel] = useState({});
   const [error, setError] = useState('');
 
   const toast = useToast();
@@ -47,6 +48,23 @@ const useGenre = () => {
       });
   };
 
+  const handleDeleteGenre = (_id) => {
+    setIsLoading(true);
+    apiClient
+      .delete(`/genres/${_id}`, config)
+      .then((res) => {
+        setIsLoading(false);
+        setDel(res.data);
+        console.log('genre has to be deleted', del);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setError(error.response.data.message || 'An error occurred'); // response other than 200
+          setIsLoading(false);
+        }
+      });
+  };
+
   useEffect(() => {
     setIsLoading(true);
     apiClient
@@ -61,8 +79,16 @@ const useGenre = () => {
           setIsLoading(false);
         }
       });
-  }, [addGenre]);
+  }, [addGenre, del]);
 
-  return { genre, isloading, error, addGenre, handleGenreSubmit };
+  return {
+    genre,
+    del,
+    isloading,
+    error,
+    addGenre,
+    handleGenreSubmit,
+    handleDeleteGenre,
+  };
 };
 export default useGenre;
