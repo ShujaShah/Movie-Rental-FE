@@ -11,6 +11,12 @@ import {
   TableContainer,
   Button,
   useDisclosure,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  AlertDialogHeader,
 } from '@chakra-ui/react';
 
 import CreateGenre from './CreateGenre';
@@ -27,7 +33,10 @@ const Genres = () => {
   } = useGenre();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log('here is the genre details', genre);
+  const addGenreModal = useDisclosure();
+  const deleteGenreModal = useDisclosure();
+
+  const cancelRef = React.useRef();
 
   const handleDelete = async (genreItemId) => {
     await handleDeleteGenre(genreItemId);
@@ -35,8 +44,9 @@ const Genres = () => {
   };
 
   useEffect(() => {
-    onClose(); //Close the modal after clicking on register
-  }, [addGenre]);
+    addGenreModal.onClose(); //Close the modal after clicking on register
+    deleteGenreModal.onClose(); // close the modal after clicking on delete
+  }, [addGenre, del]);
 
   if (!genre) return <p>No genres</p>;
 
@@ -44,10 +54,10 @@ const Genres = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Add Genre</Button>
+      <Button onClick={addGenreModal.onOpen}>Add Genre</Button>
       <CreateGenre
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={addGenreModal.isOpen}
+        onClose={addGenreModal.onClose}
         handleSubmitAdmin={handleGenreSubmit}
         isloading={isloading}
       />
@@ -83,6 +93,46 @@ const Genres = () => {
                   >
                     Delete
                   </Button>
+                </Td>
+                <Td>
+                  <Button
+                    colorScheme="red"
+                    onClick={deleteGenreModal.onOpen}
+                    leftIcon={<DeleteIcon />}
+                    variant="solid"
+                  >
+                    Delete
+                  </Button>
+                  <AlertDialog
+                    isOpen={deleteGenreModal.isOpen}
+                    leastDestructiveRef={cancelRef}
+                    onClose={deleteGenreModal.onClose}
+                  >
+                    <AlertDialogOverlay>
+                      <AlertDialogContent>
+                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                          Delete
+                        </AlertDialogHeader>
+
+                        <AlertDialogBody>
+                          Are you sure? You can't undo this action afterwards.
+                        </AlertDialogBody>
+
+                        <AlertDialogFooter>
+                          <Button ref={cancelRef} onClick={onClose}>
+                            Cancel
+                          </Button>
+                          <Button
+                            colorScheme="red"
+                            onClick={() => handleDelete(genreItem._id)}
+                            ml={3}
+                          >
+                            Delete
+                          </Button>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialogOverlay>
+                  </AlertDialog>
                 </Td>
               </Tr>
             ))}
