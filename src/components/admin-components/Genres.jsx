@@ -12,15 +12,11 @@ import {
   Button,
   useDisclosure,
   AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogContent,
-  AlertDialogOverlay,
-  AlertDialogHeader,
 } from '@chakra-ui/react';
 
 import CreateGenre from './CreateGenre';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import AlertDelete from './AlertDelete';
 
 const Genres = () => {
   const {
@@ -31,11 +27,12 @@ const Genres = () => {
     handleDeleteGenre,
     del,
   } = useGenre();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
+  // creating separate disclosures as we have to use more than one modal in this component..
   const addGenreModal = useDisclosure();
   const deleteGenreModal = useDisclosure();
 
+  // used by delete genre for cancel button
   const cancelRef = React.useRef();
 
   const handleDelete = async (genreItemId) => {
@@ -86,16 +83,6 @@ const Genres = () => {
                 </Td>
                 <Td>
                   <Button
-                    onClick={() => handleDelete(genreItem._id)}
-                    leftIcon={<DeleteIcon />}
-                    colorScheme="red"
-                    variant="solid"
-                  >
-                    Delete
-                  </Button>
-                </Td>
-                <Td>
-                  <Button
                     colorScheme="red"
                     onClick={deleteGenreModal.onOpen}
                     leftIcon={<DeleteIcon />}
@@ -108,30 +95,13 @@ const Genres = () => {
                     leastDestructiveRef={cancelRef}
                     onClose={deleteGenreModal.onClose}
                   >
-                    <AlertDialogOverlay>
-                      <AlertDialogContent>
-                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                          Delete
-                        </AlertDialogHeader>
-
-                        <AlertDialogBody>
-                          Are you sure? You can't undo this action afterwards.
-                        </AlertDialogBody>
-
-                        <AlertDialogFooter>
-                          <Button ref={cancelRef} onClick={onClose}>
-                            Cancel
-                          </Button>
-                          <Button
-                            colorScheme="red"
-                            onClick={() => handleDelete(genreItem._id)}
-                            ml={3}
-                          >
-                            Delete
-                          </Button>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialogOverlay>
+                    {/* create a custom component for alert dialogue for delete genre */}
+                    <AlertDelete
+                      isOpen={deleteGenreModal.isOpen}
+                      onClose={deleteGenreModal.onClose}
+                      handleDelete={() => handleDelete(genreItem._id)}
+                      cancelRef={cancelRef}
+                    />
                   </AlertDialog>
                 </Td>
               </Tr>
