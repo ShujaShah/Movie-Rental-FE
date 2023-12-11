@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useUsers from '../../hooks/admin-hooks/useUsers';
 import CreateUser from './CreateUser';
+import AlertDelete from './AlertDelete';
 import {
   Table,
   Thead,
@@ -12,18 +13,35 @@ import {
   Button,
   useDisclosure,
   Spinner,
+  AlertDialog,
 } from '@chakra-ui/react';
 
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 
 const Users = () => {
-  const { users, isloading, error, handleSubmitAdmin } = useUsers();
+  const {
+    users,
+    isloading,
+    error,
+    handleSubmitAdmin,
+    deleteUser,
+    handleDeleteUser,
+  } = useUsers();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const addUserModal = useDisclosure();
+  const deleteUserModal = useDisclosure();
+
+  const cancelRef = React.useRef();
 
   useEffect(() => {
-    onClose(); //Close the modal after clicking on register
-  }, [users]);
+    addUserModal.onClose(); //Close the modal after clicking on register
+    deleteUserModal.onClose();
+  }, [users, deleteUser]);
+
+  const handleDelete = async (userId) => {
+    await handleDeleteUser(userId);
+    console.log('user deleted successfully');
+  };
 
   if (!users) return <p>Login to see users...</p>;
 
@@ -33,10 +51,10 @@ const Users = () => {
     <>
       {isloading && <Spinner />}
       {error && <p>Something went wrong...</p>}
-      <Button onClick={onOpen}>Add User</Button>
+      <Button onClick={addUserModal.onOpen}>Add User</Button>
       <CreateUser
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={addUserModal.isOpen}
+        onClose={addUserModal.onClose}
         handleSubmitAdmin={handleSubmitAdmin}
         isloading={isloading}
       />
@@ -75,6 +93,28 @@ const Users = () => {
                   >
                     Delete
                   </Button>
+                </Td>
+                <Td>
+                  <Button
+                    colorScheme="red"
+                    onClick={deleteUserModal.onOpen}
+                    leftIcon={<DeleteIcon />}
+                    variant="solid"
+                  >
+                    Delete
+                  </Button>
+                  <AlertDialog
+                    isOpen={deleteUserModal.isOpen}
+                    leastDestructiveRef={cancelRef}
+                    onClose={deleteUserModal.onClose}
+                  >
+                    <AlertDelete
+                      isOpen={deleteUserModal.isOpen}
+                      onClose={deleteUserModal.onClose}
+                      handleDelete={() => handleDelete(user._id)}
+                      cancelRef={cancelRef}
+                    />
+                  </AlertDialog>
                 </Td>
               </Tr>
             ))}

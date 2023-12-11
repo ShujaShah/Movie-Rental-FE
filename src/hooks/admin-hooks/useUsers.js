@@ -8,8 +8,15 @@ const useUser = () => {
   const [users, setUsers] = useState([]);
   const [register, setRegister] = useState({});
   const [error, setError] = useState('');
+  const [deleteUser, setDelUser] = useState({});
 
   const token = localStorage.getItem('x-auth-token');
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': token,
+    },
+  };
 
   const handleSubmitAdmin = (email, name, password) => {
     setIsLoading(true);
@@ -40,14 +47,24 @@ const useUser = () => {
       });
   };
 
+  const handleDeleteUser = (_id) => {
+    setIsLoading(true);
+    const res = apiClient
+      .delete(`/users/${_id}`, config)
+      .then((res) => {
+        console.log('here is the deleted user', res.data);
+        setDelUser(res.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setError(error.response.data.message || 'An error occurred'); // response other than 200
+          setIsLoading(false);
+        }
+      });
+  };
+
   useEffect(() => {
     setIsLoading(true);
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': token,
-      },
-    };
     const res = apiClient
       .get('/users', config)
       .then((res) => {
@@ -60,9 +77,17 @@ const useUser = () => {
         setError(error.response.data);
         console.error('Error:', error?.response?.data);
       });
-  }, [register]);
+  }, [register, deleteUser]);
 
-  return { users, isloading, register, handleSubmitAdmin, error };
+  return {
+    users,
+    isloading,
+    register,
+    deleteUser,
+    handleSubmitAdmin,
+    handleDeleteUser,
+    error,
+  };
 };
 
 export default useUser;
