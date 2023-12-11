@@ -9,9 +9,11 @@ import {
   Td,
   TableContainer,
   Button,
+  AlertDialog,
 } from '@chakra-ui/react';
+import AlertDelete from './AlertDelete';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import useAddMovie from '../../hooks/admin-hooks/useAddMovie';
+import useAddMovie from '../../hooks/admin-hooks/useMovies';
 import CreateMovies from './CreateMovies';
 
 const Movies = () => {
@@ -24,13 +26,30 @@ const Movies = () => {
     movieBanner: '',
   });
 
-  const { isloading, error, handleAdminSubmit, moviesList } = useAddMovie();
+  const {
+    isloading,
+    error,
+    handleAdminSubmit,
+    moviesList,
+    handleDeleteMovie,
+    delMovie,
+  } = useAddMovie();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  //const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const addMovieModal = useDisclosure();
+  const deleteMovieModal = useDisclosure();
 
   useEffect(() => {
-    onClose();
-  }, [moviesList]);
+    addMovieModal.onClose();
+    deleteMovieModal.onClose();
+  }, [moviesList, delMovie]);
+
+  const cancelRef = useRef();
+
+  const handleDelete = async (movieId) => {
+    await handleDeleteMovie(movieId);
+  };
 
   if (!moviesList) return <p>Login to see users...</p>;
 
@@ -40,13 +59,13 @@ const Movies = () => {
     <>
       {isloading && <Spinner />}
       {error && <p>Something went wrong</p>}
-      <Button onClick={onOpen}>Add Movies</Button>
+      <Button onClick={addMovieModal.onOpen}>Add Movies</Button>
       <CreateMovies
         handleAdminSubmit={handleAdminSubmit}
         error={error}
         isloading={isloading}
-        isOpen={isOpen}
-        onClose={onClose}
+        isOpen={addMovieModal.isOpen}
+        onClose={addMovieModal.onClose}
       />
       <TableContainer pt={10}>
         <Table variant="simple">
@@ -76,12 +95,25 @@ const Movies = () => {
                 </Td>
                 <Td>
                   <Button
-                    leftIcon={<DeleteIcon />}
                     colorScheme="red"
+                    onClick={deleteMovieModal.onOpen}
+                    leftIcon={<DeleteIcon />}
                     variant="solid"
                   >
                     Delete
                   </Button>
+                  <AlertDialog
+                    isOpen={deleteMovieModal.isOpen}
+                    leastDestructiveRef={cancelRef}
+                    onClose={deleteMovieModal.onClose}
+                  >
+                    <AlertDelete
+                      isOpen={deleteMovieModal.isOpen}
+                      onClose={deleteMovieModal.onClose}
+                      handleDelete={() => handleDelete(movie._id)}
+                      cancelRef={cancelRef}
+                    />
+                  </AlertDialog>
                 </Td>
               </Tr>
             ))}

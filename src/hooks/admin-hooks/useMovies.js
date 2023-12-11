@@ -7,6 +7,7 @@ const useAddMovie = () => {
   const [error, setError] = useState('');
   const [createMovie, setCreateMovie] = useState({});
   const [moviesList, setMoviesList] = useState([]);
+  const [delMovie, setDeleteMovie] = useState({});
 
   const toast = useToast();
 
@@ -57,6 +58,23 @@ const useAddMovie = () => {
         });
       });
   };
+
+  const handleDeleteMovie = (_id) => {
+    setIsLoading(true);
+    const res = apiClient
+      .delete(`/movies/${_id}`, config)
+      .then((res) => {
+        setIsLoading(false);
+        setDeleteMovie(res.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setError(error.response.data.message || 'An error occurred'); // response other than 200
+          setIsLoading(false);
+        }
+      });
+  };
+
   useEffect(() => {
     setIsLoading(true);
     const res = apiClient
@@ -70,8 +88,17 @@ const useAddMovie = () => {
         setError(error.response.data);
         console.error('Error:', error?.response?.data);
       });
-  }, [createMovie]);
-  return { createMovie, isloading, error, moviesList, handleAdminSubmit };
+  }, [createMovie, delMovie]);
+
+  return {
+    createMovie,
+    isloading,
+    error,
+    moviesList,
+    delMovie,
+    handleAdminSubmit,
+    handleDeleteMovie,
+  };
 };
 
 export default useAddMovie;

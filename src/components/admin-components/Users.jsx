@@ -40,7 +40,6 @@ const Users = () => {
 
   const handleDelete = async (userId) => {
     await handleDeleteUser(userId);
-    console.log('user deleted successfully');
   };
 
   if (!users) return <p>Login to see users...</p>;
@@ -85,15 +84,7 @@ const Users = () => {
                     Edit
                   </Button>
                 </Td>
-                <Td>
-                  <Button
-                    leftIcon={<DeleteIcon />}
-                    colorScheme="red"
-                    variant="solid"
-                  >
-                    Delete
-                  </Button>
-                </Td>
+
                 <Td>
                   <Button
                     colorScheme="red"
