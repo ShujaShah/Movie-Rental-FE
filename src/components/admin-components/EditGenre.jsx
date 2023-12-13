@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -13,16 +13,35 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 
-const EditGenre = ({
-  isOpen,
-  onClose,
-  onSubmit,
-  updateGenre,
-  handleUpdateGenre,
-  isloading,
-}) => {
+const EditGenre = ({ isOpen, onClose, handleEdit, isloading, genreItem }) => {
+  const initialRef = useRef();
+  const finalRef = useRef();
+
+  const [updateGenre, setUpdateGenre] = useState(genreItem.name);
+
+  const handleUpdateGenre = (e) => {
+    setUpdateGenre(e.target.value);
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    await handleEdit(updateGenre);
+  };
+
+  useEffect(() => {
+    setUpdateGenre(genreItem.name);
+  }, [genreItem.name]);
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal
+      initialFocusRef={initialRef}
+      finalRef={finalRef}
+      isOpen={isOpen}
+      onClose={() => {
+        setUpdateGenre(genreItem.name);
+        onClose();
+      }}
+    >
       <ModalOverlay
         bg="blackAlpha.300"
         backdropFilter="blur(10px) hue-rotate(90deg)"
@@ -31,7 +50,7 @@ const EditGenre = ({
         <ModalHeader>Edit Genre</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleFormSubmit}>
             <FormControl mt={4}>
               <FormLabel>Name</FormLabel>
               <Input

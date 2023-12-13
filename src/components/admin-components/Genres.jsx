@@ -36,35 +36,19 @@ const Genres = () => {
   const deleteGenreModal = useDisclosure();
   const editGenreModal = useDisclosure();
 
-  const initialRef = useRef();
-  const finalRef = useRef();
-
   const [updateGenre, setUpdateGenre] = useState([]);
 
   // used by delete genre for cancel button
   const cancelRef = React.useRef();
 
-  const handleEdit = async (genreItem) => {
-    await handleEditGenre(genreItem._id, updateGenre);
-  };
-
   const handleDelete = async (genreItem) => {
     await handleDeleteGenre(genreItem);
-  };
-
-  function handleUpdateGenre(e) {
-    setUpdateGenre(e.target.value);
-  }
-
-  const handleFormSubmit = async (e, genreItem) => {
-    e.preventDefault();
-    await handleEdit(genreItem);
-    editGenreModal.onClose(); // Close the modal after submitting
   };
 
   useEffect(() => {
     addGenreModal.onClose(); //Close the modal after clicking on register
     deleteGenreModal.onClose(); // close the modal after clicking on delete
+    editGenreModal.onClose();
   }, [addGenre, del, editGenre]);
 
   if (!genre) return <p>No genres</p>;
@@ -109,9 +93,10 @@ const Genres = () => {
                   <EditGenre
                     isOpen={editGenreModal.isOpen}
                     onClose={editGenreModal.onClose}
-                    onSubmit={(e) => handleFormSubmit(e, genreItem)}
-                    updateGenre={updateGenre}
-                    handleUpdateGenre={handleUpdateGenre}
+                    genreItem={genreItem}
+                    handleEdit={(updatedGenre) =>
+                      handleEditGenre(genreItem._id, updatedGenre)
+                    }
                     isloading={isloading}
                   />
                 </Td>
