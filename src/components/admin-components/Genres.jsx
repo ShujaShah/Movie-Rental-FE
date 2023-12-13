@@ -12,16 +12,6 @@ import {
   Button,
   useDisclosure,
   AlertDialog,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
-  Spinner,
 } from '@chakra-ui/react';
 
 import CreateGenre from './CreateGenre';
@@ -124,44 +114,6 @@ const Genres = () => {
                     handleUpdateGenre={handleUpdateGenre}
                     isloading={isloading}
                   />
-                  {/* <Modal
-                    initialFocusRef={initialRef}
-                    finalFocusRef={finalRef}
-                    isOpen={editGenreModal.isOpen}
-                    onClose={editGenreModal.onClose}
-                  >
-                    <ModalOverlay
-                      bg="blackAlpha.300"
-                      backdropFilter="blur(10px) hue-rotate(90deg)"
-                    />
-                    <ModalContent>
-                      <ModalHeader>Edit Genre</ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody pb={6}>
-                        <form onSubmit={(e) => handleFormSubmit(e, genreItem)}>
-                          <FormControl mt={4}>
-                            <FormLabel>Name</FormLabel>
-                            <Input
-                              type="text"
-                              name="name"
-                              value={updateGenre}
-                              onChange={handleUpdateGenre}
-                            />
-                          </FormControl>
-                          <FormControl>
-                            <Button
-                              mt={5}
-                              variant="outline"
-                              border="1px solid #8d2dab"
-                              type="submit"
-                            >
-                              {isloading ? <Spinner /> : 'Submit'}
-                            </Button>
-                          </FormControl>
-                        </form>
-                      </ModalBody>
-                    </ModalContent>
-                  </Modal> */}
                 </Td>
                 <Td>
                   <Button
