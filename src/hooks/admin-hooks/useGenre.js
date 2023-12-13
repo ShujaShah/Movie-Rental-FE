@@ -8,6 +8,7 @@ const useGenre = () => {
   const [isloading, setIsLoading] = useState(false);
   const [del, setDel] = useState({});
   const [error, setError] = useState('');
+  const [editGenre, setEditGenre] = useState({});
 
   const toast = useToast();
   const token = localStorage.getItem('x-auth-token');
@@ -48,6 +49,24 @@ const useGenre = () => {
       });
   };
 
+  const handleEditGenre = (_id, name) => {
+    console.log('from hook genre id:', _id);
+    setIsLoading(true);
+    apiClient
+      .put(`/genres/${_id}`, { name }, config)
+      .then((res) => {
+        console.log('here is the updated name', name);
+        setEditGenre({ _id, name });
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setError(error.response.data.message || 'An error occurred'); // response other than 200
+          setIsLoading(false);
+        }
+      });
+  };
+
   const handleDeleteGenre = (_id) => {
     setIsLoading(true);
     apiClient
@@ -55,7 +74,6 @@ const useGenre = () => {
       .then((res) => {
         setIsLoading(false);
         setDel(res.data);
-        console.log('genre has to be deleted', del);
       })
       .catch((error) => {
         if (error.response) {
@@ -79,7 +97,7 @@ const useGenre = () => {
           setIsLoading(false);
         }
       });
-  }, [addGenre, del]);
+  }, [addGenre, del, editGenre]);
 
   return {
     genre,
@@ -88,7 +106,9 @@ const useGenre = () => {
     error,
     addGenre,
     handleGenreSubmit,
+    handleEditGenre,
     handleDeleteGenre,
+    editGenre,
   };
 };
 export default useGenre;
