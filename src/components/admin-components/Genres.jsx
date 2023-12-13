@@ -181,7 +181,7 @@ const Genres = () => {
   const initialRef = useRef();
   const finalRef = useRef();
 
-  const [updateGenre, setUpdateGenre] = useState('');
+  const [updateGenre, setUpdateGenre] = useState([]);
 
   // used by delete genre for cancel button
   const cancelRef = React.useRef();
@@ -200,7 +200,7 @@ const Genres = () => {
 
   const handleFormSubmit = async (e, genreItem) => {
     e.preventDefault();
-    await handleEdit(genreItem, updateGenre);
+    await handleEdit(genreItem);
     editGenreModal.onClose(); // Close the modal after submitting
   };
 
@@ -238,7 +238,10 @@ const Genres = () => {
                 <Td>{genreItem?._id}</Td>
                 <Td>
                   <Button
-                    onClick={editGenreModal.onOpen}
+                    onClick={() => {
+                      setUpdateGenre(genreItem.name);
+                      editGenreModal.onOpen();
+                    }}
                     leftIcon={<EditIcon />}
                     colorScheme="blue"
                     variant="solid"
