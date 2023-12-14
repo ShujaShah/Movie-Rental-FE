@@ -69,7 +69,6 @@ const useGenre = () => {
 
   const handleDeleteGenre = (_id) => {
     setIsLoading(true);
-    console.log('here this id is getting deleted', _id);
     apiClient
       .delete(`/genres/${_id}`, config)
       .then((res) => {

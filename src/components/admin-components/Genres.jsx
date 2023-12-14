@@ -31,7 +31,6 @@ const Genres = () => {
     editGenre,
   } = useGenre();
 
-  const [deleteGenre, setDeleteGenre] = useState();
   const [modifyGenre, setModifyGenre] = useState();
   const [selectedGenre, setSelectedGenre] = useState();
 
@@ -39,8 +38,6 @@ const Genres = () => {
   const addGenreModal = useDisclosure();
   const deleteGenreModal = useDisclosure();
   const editGenreModal = useDisclosure();
-
-  // const [updateGenre, setUpdateGenre] = useState([]);
 
   // used by delete genre for cancel button
   const cancelRef = React.useRef();
@@ -87,8 +84,6 @@ const Genres = () => {
                     onClick={() => {
                       setModifyGenre(genreItem._id);
                       setSelectedGenre(genreItem.name);
-                      console.log('Selected Genre id is:', genreItem._id);
-                      console.log('Selected Genre name is:', genreItem.name);
                       editGenreModal.onOpen();
                     }}
                     leftIcon={<EditIcon />}
@@ -103,13 +98,9 @@ const Genres = () => {
                     genreItem={genreItem}
                     selectedGenre={selectedGenre}
                     setSelectedGenre={setSelectedGenre}
-                    handleEdit={(updatedGenre) => {
-                      console.log(
-                        'This is the genre id sent to the useGenre hook:',
-                        modifyGenre
-                      );
-                      handleEditGenre(modifyGenre, updatedGenre);
-                    }}
+                    handleEdit={(updatedGenre) =>
+                      handleEditGenre(modifyGenre, updatedGenre)
+                    }
                     isloading={isloading}
                   />
                 </Td>
@@ -118,9 +109,8 @@ const Genres = () => {
                     backgroundColor="#d65f5f"
                     color="white"
                     onClick={() => {
-                      setDeleteGenre(genreItem._id);
+                      setSelectedGenre(genreItem._id);
                       deleteGenreModal.onOpen();
-                      console.log(genreItem._id);
                     }}
                     leftIcon={<DeleteIcon />}
                     variant="solid"
@@ -136,10 +126,7 @@ const Genres = () => {
                     <AlertDelete
                       isOpen={deleteGenreModal.isOpen}
                       onClose={deleteGenreModal.onClose}
-                      handleDelete={() => {
-                        handleDelete(deleteGenre);
-                        console.log('in the modal, the id is', genreItem._id);
-                      }}
+                      handleDelete={() => handleDelete(selectedGenre)}
                       cancelRef={cancelRef}
                     />
                   </AlertDialog>
