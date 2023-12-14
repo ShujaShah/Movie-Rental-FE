@@ -102,6 +102,7 @@ const Genres = () => {
                     onClose={editGenreModal.onClose}
                     genreItem={genreItem}
                     selectedGenre={selectedGenre}
+                    setSelectedGenre={setSelectedGenre}
                     handleEdit={(updatedGenre) => {
                       console.log(
                         'This is the genre id sent to the useGenre hook:',

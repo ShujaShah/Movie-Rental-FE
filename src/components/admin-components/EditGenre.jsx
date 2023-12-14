@@ -20,25 +20,19 @@ const EditGenre = ({
   isloading,
   genreItem,
   selectedGenre,
+  setSelectedGenre,
 }) => {
   const initialRef = useRef();
   const finalRef = useRef();
 
-  const [updateGenre, setUpdateGenre] = useState(selectedGenre);
-
   const handleUpdateGenre = (e) => {
-    setUpdateGenre(e.target.value);
+    setSelectedGenre(e.target.value);
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await handleEdit(updateGenre);
-    console.log('from the EditGenre Component:', updateGenre);
+    await handleEdit(selectedGenre);
   };
-
-  useEffect(() => {
-    setUpdateGenre(genreItem.name);
-  }, [genreItem.name]);
 
   return (
     <Modal
@@ -46,7 +40,7 @@ const EditGenre = ({
       finalRef={finalRef}
       isOpen={isOpen}
       onClose={() => {
-        setUpdateGenre(genreItem.name);
+        setSelectedGenre(genreItem.name);
         onClose();
       }}
     >
@@ -64,7 +58,7 @@ const EditGenre = ({
               <Input
                 type="text"
                 name="name"
-                placeholder={selectedGenre}
+                value={selectedGenre}
                 onChange={handleUpdateGenre}
               />
             </FormControl>
