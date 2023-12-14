@@ -22,14 +22,14 @@ export default function NavItem({ icon, title, active, navSize, onClick }) {
     >
       <Menu placement="right">
         <Link
-          backgroundColor={active && '#8d2dab'}
+          backgroundColor={active && '#bf58df'}
           color={active && '#fff '}
           p={3}
           borderRadius={8}
           _hover={{
             textDecor: 'none',
             color: '#fff',
-            backgroundColor: '#8d2dab',
+            backgroundColor: '#bf58df',
           }}
           w={navSize == 'large' && '100%'}
           onClick={handleItemClick}

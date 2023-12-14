@@ -33,13 +33,14 @@ const Genres = () => {
 
   const [deleteGenre, setDeleteGenre] = useState();
   const [modifyGenre, setModifyGenre] = useState();
+  const [selectedGenre, setSelectedGenre] = useState();
 
   // creating separate disclosures as we have to use more than one modal in this component..
   const addGenreModal = useDisclosure();
   const deleteGenreModal = useDisclosure();
   const editGenreModal = useDisclosure();
 
-  const [updateGenre, setUpdateGenre] = useState([]);
+  // const [updateGenre, setUpdateGenre] = useState([]);
 
   // used by delete genre for cancel button
   const cancelRef = React.useRef();
@@ -85,7 +86,9 @@ const Genres = () => {
                   <Button
                     onClick={() => {
                       setModifyGenre(genreItem._id);
+                      setSelectedGenre(genreItem.name);
                       console.log('Selected Genre id is:', genreItem._id);
+                      console.log('Selected Genre name is:', genreItem.name);
                       editGenreModal.onOpen();
                     }}
                     leftIcon={<EditIcon />}
@@ -98,10 +101,11 @@ const Genres = () => {
                     isOpen={editGenreModal.isOpen}
                     onClose={editGenreModal.onClose}
                     genreItem={genreItem}
+                    selectedGenre={selectedGenre}
                     handleEdit={(updatedGenre) => {
                       console.log(
                         'This is the genre id sent to the useGenre hook:',
-                        genreItem._id
+                        modifyGenre
                       );
                       handleEditGenre(modifyGenre, updatedGenre);
                     }}

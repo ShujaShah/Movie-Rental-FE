@@ -13,11 +13,18 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 
-const EditGenre = ({ isOpen, onClose, handleEdit, isloading, genreItem }) => {
+const EditGenre = ({
+  isOpen,
+  onClose,
+  handleEdit,
+  isloading,
+  genreItem,
+  selectedGenre,
+}) => {
   const initialRef = useRef();
   const finalRef = useRef();
 
-  const [updateGenre, setUpdateGenre] = useState(genreItem.name);
+  const [updateGenre, setUpdateGenre] = useState(selectedGenre);
 
   const handleUpdateGenre = (e) => {
     setUpdateGenre(e.target.value);
@@ -57,7 +64,7 @@ const EditGenre = ({ isOpen, onClose, handleEdit, isloading, genreItem }) => {
               <Input
                 type="text"
                 name="name"
-                value={updateGenre}
+                placeholder={selectedGenre}
                 onChange={handleUpdateGenre}
               />
             </FormControl>
