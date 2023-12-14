@@ -26,6 +26,7 @@ const EditGenre = ({ isOpen, onClose, handleEdit, isloading, genreItem }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await handleEdit(updateGenre);
+    console.log('from the EditGenre Component:', updateGenre);
   };
 
   useEffect(() => {

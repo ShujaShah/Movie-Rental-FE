@@ -31,6 +31,9 @@ const Genres = () => {
     editGenre,
   } = useGenre();
 
+  const [deleteGenre, setDeleteGenre] = useState();
+  const [modifyGenre, setModifyGenre] = useState();
+
   // creating separate disclosures as we have to use more than one modal in this component..
   const addGenreModal = useDisclosure();
   const deleteGenreModal = useDisclosure();
@@ -81,7 +84,8 @@ const Genres = () => {
                 <Td>
                   <Button
                     onClick={() => {
-                      setUpdateGenre(genreItem.name);
+                      setModifyGenre(genreItem._id);
+                      console.log('Selected Genre id is:', genreItem._id);
                       editGenreModal.onOpen();
                     }}
                     leftIcon={<EditIcon />}
@@ -94,16 +98,25 @@ const Genres = () => {
                     isOpen={editGenreModal.isOpen}
                     onClose={editGenreModal.onClose}
                     genreItem={genreItem}
-                    handleEdit={(updatedGenre) =>
-                      handleEditGenre(genreItem._id, updatedGenre)
-                    }
+                    handleEdit={(updatedGenre) => {
+                      console.log(
+                        'This is the genre id sent to the useGenre hook:',
+                        genreItem._id
+                      );
+                      handleEditGenre(modifyGenre, updatedGenre);
+                    }}
                     isloading={isloading}
                   />
                 </Td>
                 <Td>
                   <Button
-                    colorScheme="red"
-                    onClick={deleteGenreModal.onOpen}
+                    backgroundColor="#d65f5f"
+                    color="white"
+                    onClick={() => {
+                      setDeleteGenre(genreItem._id);
+                      deleteGenreModal.onOpen();
+                      console.log(genreItem._id);
+                    }}
                     leftIcon={<DeleteIcon />}
                     variant="solid"
                   >
@@ -118,7 +131,10 @@ const Genres = () => {
                     <AlertDelete
                       isOpen={deleteGenreModal.isOpen}
                       onClose={deleteGenreModal.onClose}
-                      handleDelete={() => handleDelete(genreItem._id)}
+                      handleDelete={() => {
+                        handleDelete(deleteGenre);
+                        console.log('in the modal, the id is', genreItem._id);
+                      }}
                       cancelRef={cancelRef}
                     />
                   </AlertDialog>
