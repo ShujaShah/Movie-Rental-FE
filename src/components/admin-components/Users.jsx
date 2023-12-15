@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useUsers from '../../hooks/admin-hooks/useUsers';
 import CreateUser from './CreateUser';
 import AlertDelete from './AlertDelete';
+import EditUser from './EditUser';
 import {
   Table,
   Thead,
@@ -26,9 +27,15 @@ const Users = () => {
     handleSubmitAdmin,
     deleteUser,
     handleDeleteUser,
+    handleEditUser,
+    updateUser,
   } = useUsers();
 
+  const [selectedUser, setSelectedUser] = useState({});
+  const [editUser, setEditUser] = useState({});
+
   const addUserModal = useDisclosure();
+  const updateUserModal = useDisclosure();
   const deleteUserModal = useDisclosure();
 
   const cancelRef = React.useRef();
@@ -36,7 +43,7 @@ const Users = () => {
   useEffect(() => {
     addUserModal.onClose(); //Close the modal after clicking on register
     deleteUserModal.onClose();
-  }, [users, deleteUser]);
+  }, [users, deleteUser, updateUser]);
 
   const handleDelete = async (userId) => {
     await handleDeleteUser(userId);
@@ -77,12 +84,33 @@ const Users = () => {
                 <Td>{user.createdAt}</Td>
                 <Td>
                   <Button
+                    onClick={() => {
+                      console.log(user._id);
+                      setEditUser(user._id);
+                      setSelectedUser({
+                        name: user.name,
+                        email: user.email,
+                        password: user.password,
+                      });
+                      updateUserModal.onOpen();
+                    }}
                     leftIcon={<EditIcon />}
                     colorScheme="blue"
                     variant="solid"
                   >
                     Edit
                   </Button>
+                  <EditUser
+                    isOpen={updateUserModal.isOpen}
+                    onClose={updateUserModal.onClose}
+                    user={user}
+                    selectedUser={selectedUser}
+                    setSelectedUser={setSelectedUser}
+                    handleEdit={(updatedUser) =>
+                      handleEditUser(editUser, updatedUser)
+                    }
+                    isloading={isloading}
+                  />
                 </Td>
 
                 <Td>

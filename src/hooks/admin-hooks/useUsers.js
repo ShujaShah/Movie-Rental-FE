@@ -9,6 +9,7 @@ const useUser = () => {
   const [register, setRegister] = useState({});
   const [error, setError] = useState('');
   const [deleteUser, setDelUser] = useState({});
+  const [updateUser, setUpdateUser] = useState({});
 
   const token = localStorage.getItem('x-auth-token');
   const config = {
@@ -33,6 +34,28 @@ const useUser = () => {
           duration: 3000,
           isClosable: true,
         });
+      })
+      .catch((error) => {
+        console.error('Error:', error.response.data);
+        setIsLoading(false);
+        toast({
+          title: 'Error',
+          description: `${error.response.data}`,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+  };
+
+  const handleEditUser = (_id, email, name, password) => {
+    setIsLoading(true);
+    const res = apiClient
+      .patch(`/users/${_id}`, { email, name, password }, config)
+      .then((res) => {
+        console.log('here is an updated user from hook', name);
+        setUpdateUser(res.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error:', error.response.data);
@@ -77,7 +100,7 @@ const useUser = () => {
         setError(error.response.data);
         console.error('Error:', error?.response?.data);
       });
-  }, [register, deleteUser]);
+  }, [register, deleteUser, updateUser]);
 
   return {
     users,
@@ -87,6 +110,8 @@ const useUser = () => {
     handleSubmitAdmin,
     handleDeleteUser,
     error,
+    updateUser,
+    handleEditUser,
   };
 };
 
