@@ -48,14 +48,14 @@ const useUser = () => {
       });
   };
 
-  const handleEditUser = (_id, email, name, password) => {
+  const handleEditUser = (_id, updatedUser) => {
+    console.log('Before from hook', updatedUser);
     setIsLoading(true);
     const res = apiClient
-      .patch(`/users/${_id}`, { email, name, password }, config)
+      .patch(`/users/${_id}`, { updatedUser }, config)
       .then((res) => {
-        console.log('here is an updated user from hook', name);
+        console.log('After from hook', updatedUser);
         setUpdateUser(res.data);
-        setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error:', error.response.data);

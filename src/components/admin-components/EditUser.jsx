@@ -34,7 +34,7 @@ const EditUser = ({
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log('here is the data ', selectedUser);
+    console.log('here is the data from edit component ', selectedUser);
     await handleEdit(selectedUser);
   };
 

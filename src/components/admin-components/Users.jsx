@@ -31,7 +31,11 @@ const Users = () => {
     updateUser,
   } = useUsers();
 
-  const [selectedUser, setSelectedUser] = useState({});
+  const [selectedUser, setSelectedUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const [editUser, setEditUser] = useState({});
 
   const addUserModal = useDisclosure();
@@ -106,9 +110,13 @@ const Users = () => {
                     user={user}
                     selectedUser={selectedUser}
                     setSelectedUser={setSelectedUser}
-                    handleEdit={(updatedUser) =>
-                      handleEditUser(editUser, updatedUser)
-                    }
+                    handleEdit={(updatedUser) => {
+                      handleEditUser(editUser, updatedUser);
+                      console.log(
+                        'here is the selected user data:',
+                        selectedUser
+                      );
+                    }}
                     isloading={isloading}
                   />
                 </Td>
