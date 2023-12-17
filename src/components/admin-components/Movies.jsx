@@ -17,14 +17,7 @@ import useAddMovie from '../../hooks/admin-hooks/useMovies';
 import CreateMovies from './CreateMovies';
 
 const Movies = () => {
-  const [movieData, setMovieData] = useState({
-    title: '',
-    numberInStock: '',
-    dailyRentalRate: '',
-    slug: '',
-    genre: '',
-    movieBanner: '',
-  });
+  const [movieData, setMovieData] = useState({});
 
   const {
     isloading,
@@ -96,7 +89,10 @@ const Movies = () => {
                 <Td>
                   <Button
                     colorScheme="red"
-                    onClick={deleteMovieModal.onOpen}
+                    onClick={() => {
+                      deleteMovieModal.onOpen();
+                      setMovieData(movie._id);
+                    }}
                     leftIcon={<DeleteIcon />}
                     variant="solid"
                   >
@@ -110,7 +106,7 @@ const Movies = () => {
                     <AlertDelete
                       isOpen={deleteMovieModal.isOpen}
                       onClose={deleteMovieModal.onClose}
-                      handleDelete={() => handleDelete(movie._id)}
+                      handleDelete={() => handleDelete(movieData)}
                       cancelRef={cancelRef}
                     />
                   </AlertDialog>
