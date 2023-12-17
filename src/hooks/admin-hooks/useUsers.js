@@ -54,8 +54,14 @@ const useUser = () => {
     const res = apiClient
       .patch(`/users/${_id}`, updatedUser, config)
       .then((res) => {
-        //  console.log('After from hook', updatedUser);
         setUpdateUser(res.data);
+        toast({
+          title: 'Success',
+          description: `Successfully edited ${updateUser.name}`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
       })
       .catch((error) => {
         console.error('Error:', error.response.data);

@@ -57,6 +57,13 @@ const useGenre = () => {
       .then((res) => {
         console.log('here is the updated name', name);
         setEditGenre({ _id, name });
+        toast({
+          title: 'Success',
+          description: `Successfully edited ${editGenre.name}`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
         setIsLoading(false);
       })
       .catch((error) => {
