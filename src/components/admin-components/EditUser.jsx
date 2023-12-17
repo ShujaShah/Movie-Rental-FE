@@ -26,15 +26,14 @@ const EditUser = ({
   const finalRef = useRef();
 
   const handleUserData = (e) => {
-    setSelectedUser({
-      ...selectedUser,
+    setSelectedUser((prevUser) => ({
+      ...prevUser,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log('here is the data from edit component ', selectedUser);
     await handleEdit(selectedUser);
   };
 

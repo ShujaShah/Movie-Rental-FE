@@ -1,4 +1,3 @@
-// old working code
 import React, { useEffect, useState, useRef } from 'react';
 import useUsers from '../../hooks/admin-hooks/useUsers';
 import CreateUser from './CreateUser';
@@ -16,15 +15,6 @@ import {
   useDisclosure,
   Spinner,
   AlertDialog,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
 } from '@chakra-ui/react';
 
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
@@ -41,29 +31,9 @@ const Users = () => {
     updateUser,
   } = useUsers();
 
-  const [selectedUser, setSelectedUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const [selectedUser, setSelectedUser] = useState({});
   const [editUser, setEditUser] = useState({});
 
-  const initialRef = useRef();
-  const finalRef = useRef();
-
-  const handleUserData = (e) => {
-    setSelectedUser((prevUser) => ({
-      ...prevUser,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleFormEditSubmit = async (e) => {
-    e.preventDefault();
-    await handleEditUser(editUser, selectedUser);
-    console.log('selected user is:', selectedUser);
-  };
-  //=================================================== END OF EDIT USER =====================================================
   const addUserModal = useDisclosure();
   const updateUserModal = useDisclosure();
   const deleteUserModal = useDisclosure();
@@ -131,7 +101,7 @@ const Users = () => {
                   >
                     Edit
                   </Button>
-                  {/* <EditUser
+                  <EditUser
                     isOpen={updateUserModal.isOpen}
                     onClose={updateUserModal.onClose}
                     user={user}
@@ -139,78 +109,18 @@ const Users = () => {
                     setSelectedUser={setSelectedUser}
                     handleEdit={(updatedUser) => {
                       handleEditUser(editUser, updatedUser); // edit user sends the id and updated user sends the entire user
-                      console.log(
-                        'here is the selected user data:',
-                        selectedUser
-                      );
                     }}
                     isloading={isloading}
-                  /> */}
-                  <Modal
-                    initialFocusRef={initialRef}
-                    finalRef={finalRef}
-                    isOpen={updateUserModal.isOpen}
-                    onClose={updateUserModal.onClose}
-                  >
-                    <ModalOverlay
-                      bg="blackAlpha.300"
-                      backdropFilter="blur(10px) hue-rotate(90deg)"
-                    />
-                    <ModalContent>
-                      <ModalHeader>Edit User</ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody pb={6}>
-                        <form onSubmit={handleFormEditSubmit}>
-                          <FormControl mt={4}>
-                            <FormLabel>Name</FormLabel>
-                            <Input
-                              type="text"
-                              name="name"
-                              value={selectedUser?.name}
-                              // defaultValue={selectedUser?.name}
-                              onChange={handleUserData}
-                            />
-                          </FormControl>
-                          <FormControl mt={4}>
-                            <FormLabel>Email</FormLabel>
-                            <Input
-                              type="email"
-                              name="email"
-                              value={selectedUser?.email}
-                              //defaultValue={selectedUser?.email}
-                              onChange={handleUserData}
-                            />
-                          </FormControl>
-                          <FormControl mt={4}>
-                            <FormLabel>Password</FormLabel>
-                            <Input
-                              type="password"
-                              name="password"
-                              // value={selectedUser?.password}
-                              placeholder={'password'}
-                              onChange={handleUserData}
-                            />
-                          </FormControl>
-                          <FormControl>
-                            <Button
-                              mt={5}
-                              variant="outline"
-                              border="1px solid #8d2dab"
-                              type="submit"
-                            >
-                              {isloading ? <Spinner /> : 'Submit'}
-                            </Button>
-                          </FormControl>
-                        </form>
-                      </ModalBody>
-                    </ModalContent>
-                  </Modal>
+                  />
                 </Td>
 
                 <Td>
                   <Button
                     colorScheme="red"
-                    onClick={deleteUserModal.onOpen}
+                    onClick={() => {
+                      setSelectedUser(user._id);
+                      deleteUserModal.onOpen();
+                    }}
                     leftIcon={<DeleteIcon />}
                     variant="solid"
                   >
@@ -224,7 +134,7 @@ const Users = () => {
                     <AlertDelete
                       isOpen={deleteUserModal.isOpen}
                       onClose={deleteUserModal.onClose}
-                      handleDelete={() => handleDelete(user._id)}
+                      handleDelete={() => handleDelete(selectedUser)}
                       cancelRef={cancelRef}
                     />
                   </AlertDialog>
