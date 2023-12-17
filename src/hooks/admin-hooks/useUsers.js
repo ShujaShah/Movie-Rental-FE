@@ -52,9 +52,9 @@ const useUser = () => {
     console.log('Before from hook', updatedUser);
     setIsLoading(true);
     const res = apiClient
-      .patch(`/users/${_id}`, { updatedUser }, config)
+      .patch(`/users/${_id}`, updatedUser, config)
       .then((res) => {
-        console.log('After from hook', updatedUser);
+        //  console.log('After from hook', updatedUser);
         setUpdateUser(res.data);
       })
       .catch((error) => {
