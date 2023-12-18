@@ -21,58 +21,39 @@ const EditMovie = ({
   isOpen,
   onClose,
   handleEditSubmit,
+  handleEdit,
   isloading,
   error,
+  movieData,
   selectedMovie,
+  setSelectedMovie,
 }) => {
   const { genre } = useGenre();
 
-  const [movieData, setMovieData] = useState({
-    title: '',
-    numberInStock: '',
-    dailyRentalRate: '',
-    slug: '',
-    genre: '',
-    movieBanner: '',
-  });
   const initialRef = useRef();
   const finalRef = useRef();
 
   function handleMovieData(e) {
-    setMovieData({
-      ...movieData,
+    setSelectedMovie((prevMovie) => ({
+      ...prevMovie,
       [e.target.name]: e.target.value,
-    });
+    }));
   }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    await handleEditSubmit(movieData);
-    setMovieData({
-      title: '',
-      numberInStock: '',
-      dailyRentalRate: '',
-      slug: '',
-      genre: '',
-      movieBanner: '',
-    });
+    await handleEdit(selectedMovie);
   };
 
   return (
     <>
-      {isloading && <Spinner />}
-      {error && <p>Something went wrong</p>}
-
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
       >
-        <ModalOverlay
-          bg="blackAlpha.300"
-          backdropFilter="blur(10px) hue-rotate(90deg)"
-        />
+        <ModalOverlay />
         <ModalContent>
           <ModalHeader>Enter Details</ModalHeader>
           <ModalCloseButton />
@@ -83,7 +64,7 @@ const EditMovie = ({
                 <Input
                   type="text"
                   name="title"
-                  value={movieData.title}
+                  value={selectedMovie?.title}
                   onChange={handleMovieData}
                 />
               </FormControl>
@@ -92,7 +73,7 @@ const EditMovie = ({
                 <Input
                   type="text"
                   name="slug"
-                  value={movieData.slug}
+                  value={selectedMovie?.slug}
                   onChange={handleMovieData}
                 />
               </FormControl>
@@ -101,7 +82,7 @@ const EditMovie = ({
                 <Input
                   type="number"
                   name="numberInStock"
-                  value={movieData.numberInStock}
+                  value={selectedMovie?.numberInStock}
                   onChange={handleMovieData}
                 />
               </FormControl>
@@ -110,7 +91,7 @@ const EditMovie = ({
                 <Input
                   type="number"
                   name="dailyRentalRate"
-                  value={movieData.dailyRentalRate}
+                  value={selectedMovie.dailyRentalRate}
                   onChange={handleMovieData}
                 />
               </FormControl>
@@ -120,7 +101,7 @@ const EditMovie = ({
                   placeholder="Select Genre"
                   onChange={(e) => handleMovieData(e)}
                   name="genre"
-                  value={movieData.genre}
+                  value={genre?.name}
                 >
                   {genre.map((genreItem) => (
                     <option key={genreItem._id} value={genreItem._id}>
@@ -134,7 +115,7 @@ const EditMovie = ({
                 <Input
                   type="text"
                   name="movieBanner"
-                  value={movieData.movieBanner}
+                  value={selectedMovie?.movieBanner}
                   onChange={handleMovieData}
                 />
               </FormControl>

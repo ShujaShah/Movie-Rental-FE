@@ -65,12 +65,12 @@ const useAddMovie = () => {
     const res = apiClient
       .patch(`/movies/${_id}`, updatedMovie, config)
       .then((res) => {
-        isloading(false);
-        console.log('updated movie from hook', updatedMovie);
         setEditMovie(res.data);
+        console.log('updated movie from hook', updatedMovie);
         setIsLoading(false);
       })
       .catch((error) => {
+        console.log('error is:', error);
         console.error('Error:', error.response.data);
         setError(error.response.data);
         setIsLoading(false);

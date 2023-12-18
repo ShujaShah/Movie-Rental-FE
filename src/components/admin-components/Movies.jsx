@@ -27,6 +27,7 @@ const Movies = () => {
     handleAdminSubmit,
     moviesList,
     handleDeleteMovie,
+    handleEditMovie,
     delMovie,
     editMovie,
   } = useAddMovie();
@@ -39,6 +40,7 @@ const Movies = () => {
 
   useEffect(() => {
     addMovieModal.onClose();
+    updateMovieModal.onClose();
     deleteMovieModal.onClose();
   }, [moviesList, editMovie, delMovie]);
 
@@ -87,7 +89,16 @@ const Movies = () => {
                     leftIcon={<EditIcon />}
                     onClick={() => {
                       updateMovieModal.onOpen();
-                      setSelectedMovie(movie._id);
+                      setMovieData(movie._id);
+                      setSelectedMovie({
+                        title: movie.title,
+                        numberInStock: movie.numberInStock,
+                        dailyRentalRate: movie.dailyRentalRate,
+                        slug: movie.slug,
+                        genre: movie.genre.name,
+                        movieBanner: movie.movieBanner,
+                      });
+                      console.log(selectedMovie);
                     }}
                     colorScheme="blue"
                     variant="solid"
@@ -97,10 +108,13 @@ const Movies = () => {
                   <EditMovie
                     isOpen={updateMovieModal.isOpen}
                     onClose={updateMovieModal.onClose}
-                    //handleEditSubmit={handleEditSubmit}
                     selectedMovie={selectedMovie}
-                    setSelectedMovie={selectedMovie}
+                    setSelectedMovie={setSelectedMovie}
                     movieData={movieData}
+                    handleEdit={(updatedMovie) => {
+                      console.log('here is the movie data sent', updatedMovie);
+                      handleEditMovie(movieData, updatedMovie);
+                    }}
                     error={error}
                     isloading={isloading}
                   />
