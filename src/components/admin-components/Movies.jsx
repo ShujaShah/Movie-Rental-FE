@@ -1,5 +1,6 @@
 import { React, useEffect, useRef, useState } from 'react';
 import { Spinner, useDisclosure } from '@chakra-ui/react';
+import EditMovie from './EditMovie';
 import {
   Table,
   Thead,
@@ -18,6 +19,7 @@ import CreateMovies from './CreateMovies';
 
 const Movies = () => {
   const [movieData, setMovieData] = useState({});
+  const [selectedMovie, setSelectedMovie] = useState({});
 
   const {
     isloading,
@@ -26,17 +28,19 @@ const Movies = () => {
     moviesList,
     handleDeleteMovie,
     delMovie,
+    editMovie,
   } = useAddMovie();
 
   //const { isOpen, onOpen, onClose } = useDisclosure();
 
   const addMovieModal = useDisclosure();
+  const updateMovieModal = useDisclosure();
   const deleteMovieModal = useDisclosure();
 
   useEffect(() => {
     addMovieModal.onClose();
     deleteMovieModal.onClose();
-  }, [moviesList, delMovie]);
+  }, [moviesList, editMovie, delMovie]);
 
   const cancelRef = useRef();
 
@@ -54,12 +58,13 @@ const Movies = () => {
       {error && <p>Something went wrong</p>}
       <Button onClick={addMovieModal.onOpen}>Add Movies</Button>
       <CreateMovies
+        isOpen={addMovieModal.isOpen}
+        onClose={addMovieModal.onClose}
         handleAdminSubmit={handleAdminSubmit}
         error={error}
         isloading={isloading}
-        isOpen={addMovieModal.isOpen}
-        onClose={addMovieModal.onClose}
       />
+
       <TableContainer pt={10}>
         <Table variant="simple">
           <Thead>
@@ -80,11 +85,25 @@ const Movies = () => {
                 <Td>
                   <Button
                     leftIcon={<EditIcon />}
+                    onClick={() => {
+                      updateMovieModal.onOpen();
+                      setSelectedMovie(movie._id);
+                    }}
                     colorScheme="blue"
                     variant="solid"
                   >
                     Edit
                   </Button>
+                  <EditMovie
+                    isOpen={updateMovieModal.isOpen}
+                    onClose={updateMovieModal.onClose}
+                    //handleEditSubmit={handleEditSubmit}
+                    selectedMovie={selectedMovie}
+                    setSelectedMovie={selectedMovie}
+                    movieData={movieData}
+                    error={error}
+                    isloading={isloading}
+                  />
                 </Td>
                 <Td>
                   <Button

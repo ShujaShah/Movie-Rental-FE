@@ -7,6 +7,7 @@ const useAddMovie = () => {
   const [error, setError] = useState('');
   const [createMovie, setCreateMovie] = useState({});
   const [moviesList, setMoviesList] = useState([]);
+  const [editMovie, setEditMovie] = useState({});
   const [delMovie, setDeleteMovie] = useState({});
 
   const toast = useToast();
@@ -59,6 +60,30 @@ const useAddMovie = () => {
       });
   };
 
+  const handleEditMovie = (_id, updatedMovie) => {
+    setIsLoading(true);
+    const res = apiClient
+      .patch(`/movies/${_id}`, updatedMovie, config)
+      .then((res) => {
+        isloading(false);
+        console.log('updated movie from hook', updatedMovie);
+        setEditMovie(res.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error:', error.response.data);
+        setError(error.response.data);
+        setIsLoading(false);
+        toast({
+          title: 'Error',
+          description: `${error.response.data}`,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+  };
+
   const handleDeleteMovie = (_id) => {
     setIsLoading(true);
     const res = apiClient
@@ -88,7 +113,7 @@ const useAddMovie = () => {
         setError(error.response.data);
         console.error('Error:', error?.response?.data);
       });
-  }, [createMovie, delMovie]);
+  }, [createMovie, editMovie, delMovie]);
 
   return {
     createMovie,
@@ -96,8 +121,10 @@ const useAddMovie = () => {
     error,
     moviesList,
     delMovie,
+    editMovie,
     handleAdminSubmit,
     handleDeleteMovie,
+    handleEditMovie,
   };
 };
 
