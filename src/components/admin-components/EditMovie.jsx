@@ -98,10 +98,10 @@ const EditMovie = ({
               <FormControl mt={4}>
                 <FormLabel>Genre</FormLabel>
                 <Select
-                  placeholder="Select Genre"
+                  placeholder={selectedMovie.genre}
                   onChange={(e) => handleMovieData(e)}
                   name="genre"
-                  value={genre?.name}
+                  defaultValue={selectedMovie.genre}
                 >
                   {genre.map((genreItem) => (
                     <option key={genreItem._id} value={genreItem._id}>
