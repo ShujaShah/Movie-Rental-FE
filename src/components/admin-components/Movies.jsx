@@ -20,6 +20,7 @@ import CreateMovies from './CreateMovies';
 const Movies = () => {
   const [movieData, setMovieData] = useState({});
   const [selectedMovie, setSelectedMovie] = useState({});
+  const [selectedMovieGenre, setSelectedMovieGenre] = useState([]);
 
   const {
     isloading,
@@ -30,7 +31,10 @@ const Movies = () => {
     handleEditMovie,
     delMovie,
     editMovie,
+    genres,
   } = useAddMovie();
+
+  console.log('here are the genres', genres);
 
   //const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -89,6 +93,7 @@ const Movies = () => {
                     onClick={() => {
                       updateMovieModal.onOpen();
                       setMovieData(movie._id);
+                      console.log('here is the genre', movie.genre);
                       setSelectedMovie({
                         title: movie.title,
                         numberInStock: movie.numberInStock,
@@ -109,11 +114,13 @@ const Movies = () => {
                     onClose={updateMovieModal.onClose}
                     selectedMovie={selectedMovie}
                     setSelectedMovie={setSelectedMovie}
+                    selectedMovieGenre={selectedMovieGenre}
                     movieData={movieData}
                     handleEdit={(updatedMovie) => {
                       console.log('here is the movie data sent', updatedMovie);
                       handleEditMovie(movieData, updatedMovie);
                     }}
+                    genres={genres}
                     error={error}
                     isloading={isloading}
                   />

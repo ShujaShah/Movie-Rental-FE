@@ -9,27 +9,25 @@ import {
   FormLabel,
   Input,
   Spinner,
-  useDisclosure,
   Button,
   Select,
 } from '@chakra-ui/react';
 
 import { useState, useRef } from 'react';
 import useGenre from '../../hooks/admin-hooks/useGenre';
+import useAddMovie from '../../hooks/admin-hooks/useMovies';
 
 const EditMovie = ({
   isOpen,
   onClose,
-  handleEditSubmit,
   handleEdit,
   isloading,
-  error,
+  genres,
   movieData,
   selectedMovie,
+  selectedMovieGenre,
   setSelectedMovie,
 }) => {
-  const { genre } = useGenre();
-
   const initialRef = useRef();
   const finalRef = useRef();
 
@@ -103,7 +101,7 @@ const EditMovie = ({
                   name="genre"
                   defaultValue={selectedMovie.genre}
                 >
-                  {genre.map((genreItem) => (
+                  {genres.map((genreItem) => (
                     <option key={genreItem._id} value={genreItem._id}>
                       {genreItem.name}
                     </option>

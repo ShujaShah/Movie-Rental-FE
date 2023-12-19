@@ -9,6 +9,7 @@ const useAddMovie = () => {
   const [moviesList, setMoviesList] = useState([]);
   const [editMovie, setEditMovie] = useState({});
   const [delMovie, setDeleteMovie] = useState({});
+  const [genres, setGenres] = useState([]);
 
   const toast = useToast();
 
@@ -103,6 +104,23 @@ const useAddMovie = () => {
   useEffect(() => {
     setIsLoading(true);
     const res = apiClient
+      .get('/genres')
+      .then((res) => {
+        console.log('genres are', genres);
+        setGenres(res.data.genres);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setError(error.response.data.message || 'An error occurred'); // response other than 200
+          setIsLoading(false);
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const res = apiClient
       .get('/movies')
       .then((res) => {
         setMoviesList(res.data);
@@ -113,7 +131,7 @@ const useAddMovie = () => {
         setError(error.response.data);
         console.error('Error:', error?.response?.data);
       });
-  }, [createMovie, editMovie, delMovie]);
+  }, [createMovie, editMovie, genres, delMovie]);
 
   return {
     createMovie,
@@ -125,6 +143,8 @@ const useAddMovie = () => {
     handleAdminSubmit,
     handleDeleteMovie,
     handleEditMovie,
+
+    genres,
   };
 };
 
