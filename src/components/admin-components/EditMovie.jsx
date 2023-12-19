@@ -23,9 +23,7 @@ const EditMovie = ({
   handleEdit,
   isloading,
   genres,
-  movieData,
   selectedMovie,
-  selectedMovieGenre,
   setSelectedMovie,
 }) => {
   const initialRef = useRef();

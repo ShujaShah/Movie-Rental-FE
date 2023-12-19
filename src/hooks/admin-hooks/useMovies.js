@@ -101,12 +101,12 @@ const useAddMovie = () => {
       });
   };
 
+  //get the genres
   useEffect(() => {
     setIsLoading(true);
     const res = apiClient
       .get('/genres')
       .then((res) => {
-        console.log('genres are', genres);
         setGenres(res.data.genres);
         setIsLoading(false);
       })
