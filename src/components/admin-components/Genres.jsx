@@ -81,12 +81,12 @@ const Genres = () => {
                 <Td>{genreItem?._id}</Td>
                 <Td>
                   <Button
+                    leftIcon={<EditIcon />}
                     onClick={() => {
                       setModifyGenre(genreItem._id);
                       setSelectedGenre(genreItem.name);
                       editGenreModal.onOpen();
                     }}
-                    leftIcon={<EditIcon />}
                     colorScheme="blue"
                     variant="solid"
                   >

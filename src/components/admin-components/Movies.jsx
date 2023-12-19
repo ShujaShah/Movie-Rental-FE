@@ -66,7 +66,6 @@ const Movies = () => {
         error={error}
         isloading={isloading}
       />
-
       <TableContainer pt={10}>
         <Table variant="simple">
           <Thead>
@@ -123,8 +122,8 @@ const Movies = () => {
                   <Button
                     colorScheme="red"
                     onClick={() => {
-                      deleteMovieModal.onOpen();
                       setMovieData(movie._id);
+                      deleteMovieModal.onOpen();
                     }}
                     leftIcon={<DeleteIcon />}
                     variant="solid"
