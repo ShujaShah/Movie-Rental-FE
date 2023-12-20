@@ -88,7 +88,6 @@ const Movies = () => {
                   <Button
                     leftIcon={<EditIcon />}
                     onClick={() => {
-                      updateMovieModal.onOpen();
                       setMovieData(movie._id);
                       console.log('here is the genre', movie.genre);
                       setSelectedMovie({
@@ -99,6 +98,7 @@ const Movies = () => {
                         genre: movie.genre.name,
                         movieBanner: movie.movieBanner,
                       });
+                      updateMovieModal.onOpen();
                       console.log(selectedMovie);
                     }}
                     colorScheme="blue"
@@ -106,20 +106,6 @@ const Movies = () => {
                   >
                     Edit
                   </Button>
-                  <EditMovie
-                    isOpen={updateMovieModal.isOpen}
-                    onClose={updateMovieModal.onClose}
-                    selectedMovie={selectedMovie}
-                    setSelectedMovie={setSelectedMovie}
-                    movieData={movieData}
-                    handleEdit={(updatedMovie) => {
-                      console.log('here is the movie data sent', updatedMovie);
-                      handleEditMovie(movieData, updatedMovie);
-                    }}
-                    genres={genres}
-                    error={error}
-                    isloading={isloading}
-                  />
                 </Td>
                 <Td>
                   <Button
@@ -133,24 +119,40 @@ const Movies = () => {
                   >
                     Delete
                   </Button>
-                  <AlertDialog
-                    isOpen={deleteMovieModal.isOpen}
-                    leastDestructiveRef={cancelRef}
-                    onClose={deleteMovieModal.onClose}
-                  >
-                    <AlertDelete
-                      isOpen={deleteMovieModal.isOpen}
-                      onClose={deleteMovieModal.onClose}
-                      handleDelete={() => handleDelete(movieData)}
-                      cancelRef={cancelRef}
-                    />
-                  </AlertDialog>
                 </Td>
               </Tr>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
+      {/* Modal : Edit movie component  */}
+      <EditMovie
+        isOpen={updateMovieModal.isOpen}
+        onClose={updateMovieModal.onClose}
+        selectedMovie={selectedMovie}
+        setSelectedMovie={setSelectedMovie}
+        movieData={movieData}
+        handleEdit={(updatedMovie) => {
+          console.log('here is the movie data sent', updatedMovie);
+          handleEditMovie(movieData, updatedMovie);
+        }}
+        genres={genres}
+        error={error}
+        isloading={isloading}
+      />
+      {/* Modal: Delete movie */}
+      <AlertDialog
+        isOpen={deleteMovieModal.isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={deleteMovieModal.onClose}
+      >
+        <AlertDelete
+          isOpen={deleteMovieModal.isOpen}
+          onClose={deleteMovieModal.onClose}
+          handleDelete={() => handleDelete(movieData)}
+          cancelRef={cancelRef}
+        />
+      </AlertDialog>
     </>
   );
 };
