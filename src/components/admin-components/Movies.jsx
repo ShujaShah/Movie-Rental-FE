@@ -59,7 +59,9 @@ const Movies = () => {
     <>
       {isloading && <Spinner />}
       {error && <p>Something went wrong</p>}
-      <Button onClick={addMovieModal.onOpen}>Add Movies</Button>
+      <Button className="add-button" onClick={addMovieModal.onOpen}>
+        Add Movies
+      </Button>
       <CreateMovies
         isOpen={addMovieModal.isOpen}
         onClose={addMovieModal.onClose}
@@ -109,7 +111,7 @@ const Movies = () => {
                 </Td>
                 <Td>
                   <Button
-                    colorScheme="red"
+                    className="delete-button"
                     onClick={() => {
                       setMovieData(movie._id);
                       deleteMovieModal.onOpen();

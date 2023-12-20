@@ -58,7 +58,9 @@ const Users = () => {
     <>
       {isloading && <Spinner />}
       {error && <p>Something went wrong...</p>}
-      <Button onClick={addUserModal.onOpen}>Add User</Button>
+      <Button className="add-button" onClick={addUserModal.onOpen}>
+        Add User
+      </Button>
       <CreateUser
         isOpen={addUserModal.isOpen}
         onClose={addUserModal.onClose}
@@ -116,7 +118,7 @@ const Users = () => {
 
                 <Td>
                   <Button
-                    colorScheme="red"
+                    className="delete-button"
                     onClick={() => {
                       setSelectedUser(user._id);
                       deleteUserModal.onOpen();

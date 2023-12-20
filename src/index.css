@@ -5,3 +5,13 @@ body {
 .search-form {
   width: 100%;
 }
+
+.delete-button {
+  background-color: #d65f5f !important;
+  color: white !important;
+}
+
+.add-button {
+  background-color: #89e089 !important;
+  color: black !important;
+}

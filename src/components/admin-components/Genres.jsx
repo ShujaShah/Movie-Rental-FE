@@ -58,7 +58,9 @@ const Genres = () => {
 
   return (
     <>
-      <Button onClick={addGenreModal.onOpen}>Add Genre</Button>
+      <Button className="add-button" onClick={addGenreModal.onOpen}>
+        Add Genre
+      </Button>
       <CreateGenre
         isOpen={addGenreModal.isOpen}
         onClose={addGenreModal.onClose}
@@ -106,8 +108,7 @@ const Genres = () => {
                 </Td>
                 <Td>
                   <Button
-                    backgroundColor="#d65f5f"
-                    color="white"
+                    className="delete-button"
                     onClick={() => {
                       setSelectedGenre(genreItem._id);
                       deleteGenreModal.onOpen();
