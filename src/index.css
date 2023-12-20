@@ -15,3 +15,9 @@ body {
   background-color: #89e089 !important;
   color: black !important;
 }
+
+.dashboard-cards {
+  background-color: #93a1eeb0;
+  box-shadow: 0 0 10px #7871bb !important;
+  width: 60%;
+}

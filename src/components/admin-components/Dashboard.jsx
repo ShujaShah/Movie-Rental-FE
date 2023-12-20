@@ -25,15 +25,10 @@ const Dashboard = () => {
     <>
       {isloading && <Spinner />}
       <Grid templateColumns="repeat(4, 1fr)" gap={30} mt={20}>
-        <GridItem
-          w="60%"
-          bg="#8d2dab30"
-          padding={5}
-          boxShadow="0 0 10px #c686ad"
-        >
+        <GridItem padding={5} className="dashboard-cards">
           <StatGroup>
             <Stat>
-              <TiShoppingCart fontSize={50} color="#9E5AB3" />
+              <TiShoppingCart fontSize={50} />
               <StatLabel>Orders</StatLabel>
               <StatNumber>{rentals}</StatNumber>
               <StatHelpText>
@@ -42,15 +37,10 @@ const Dashboard = () => {
             </Stat>
           </StatGroup>
         </GridItem>
-        <GridItem
-          w="60%"
-          bg="#8d2dab30"
-          padding={5}
-          boxShadow="0 0 10px #c686ad"
-        >
+        <GridItem w="60%" padding={5} className="dashboard-cards">
           <StatGroup>
             <Stat>
-              <FaUsers fontSize={50} color="#9E5AB3" />
+              <FaUsers fontSize={50} />
               <StatLabel>Customers</StatLabel>
               <StatNumber>{customers}</StatNumber>
               <StatHelpText>
@@ -59,15 +49,10 @@ const Dashboard = () => {
             </Stat>
           </StatGroup>
         </GridItem>
-        <GridItem
-          w="60%"
-          bg="#8d2dab30"
-          padding={5}
-          boxShadow="0 0 10px #c686ad"
-        >
+        <GridItem padding={5} className="dashboard-cards">
           <StatGroup>
             <Stat>
-              <FaPhotoVideo fontSize={50} color="#9E5AB3" />
+              <FaPhotoVideo fontSize={50} />
               <StatLabel>Movies</StatLabel>
               <StatNumber>{movies}</StatNumber>
               <StatHelpText>
@@ -76,15 +61,10 @@ const Dashboard = () => {
             </Stat>
           </StatGroup>
         </GridItem>
-        <GridItem
-          w="60%"
-          bg="#8d2dab30"
-          padding={5}
-          boxShadow="0 0 10px #c686ad"
-        >
+        <GridItem padding={5} className="dashboard-cards">
           <StatGroup>
             <Stat>
-              <IoFilterCircleOutline fontSize={50} color="#9E5AB3" />
+              <IoFilterCircleOutline fontSize={50} />
 
               <StatLabel>Genres</StatLabel>
               <StatNumber>{genres}</StatNumber>
