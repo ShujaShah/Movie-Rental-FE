@@ -26,7 +26,7 @@ const CreateGenre = ({ isOpen, onClose, handleSubmitAdmin, isloading }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await handleSubmitAdmin(name);
-    setName(''); // to clear the input fields...
+    setName('');
   };
 
   return (
