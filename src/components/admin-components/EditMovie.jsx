@@ -13,9 +13,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 
-import { useState, useRef } from 'react';
-import useGenre from '../../hooks/admin-hooks/useGenre';
-import useAddMovie from '../../hooks/admin-hooks/useMovies';
+import { useRef } from 'react';
 
 const EditMovie = ({
   isOpen,
