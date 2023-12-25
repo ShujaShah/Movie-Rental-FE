@@ -4,7 +4,6 @@ import {
   Text,
   IconButton,
   Divider,
-  Avatar,
   Heading,
   Button,
 } from '@chakra-ui/react';

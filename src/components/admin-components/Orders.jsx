@@ -8,7 +8,6 @@ import {
   Th,
   Td,
   TableContainer,
-  Button,
 } from '@chakra-ui/react';
 
 const Orders = () => {
