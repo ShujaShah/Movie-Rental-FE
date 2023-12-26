@@ -83,7 +83,6 @@ const EditUser = ({
               <Input
                 type="password"
                 name="password"
-                // value={selectedUser?.password}
                 placeholder={'password'}
                 onChange={handleUserData}
               />
